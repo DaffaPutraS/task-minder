@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Montserrat:wght@600&family=Mulish:wght@500&family=Open+Sans:wght@500&family=Poppins&display=swap');
+
+:root {
+    --main-color: #57C5B6;
+    --second-color: #159895;
+    --third-color: #1A5F7A;
+    --fourth-color: #002B5B;
+    --black: #333;
+    --white: #fff;
+    --border:.2rem solid var(--black);
+    --border2:.2rem solid var(--white);
+    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+*::-moz-selection {
+    background-color: var(--font-color);
+    color: var(--white);
+}
+
+*::selection {
+    background-color: var(--font-color);
+    color: var(--white);
+}
+
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 8rem;
+}
+
+section {
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+body {
+    background-image: url('../img/background-login.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+.login-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6rem;
+    margin-top: 10rem;
+}
+
+.login-container .book-img{
+    flex: 1 1 5rem;
+}
+
+.login-container .book-img img{
+    width: 100%;
+}
+
+.login-container .form{
+    flex: 1 1 5rem;
+    width: 100%;
+    padding-right: 5rem;
+    margin: auto;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.btn:hover {
+    opacity:1;
+}
