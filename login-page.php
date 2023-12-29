@@ -30,7 +30,7 @@
             <label for="password"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required>
 
-            <img src="Proses/captcha.php" alt="gambar"><br> <!-- tentukan letak script generate gambar -->
+            <img src="proses/captcha.php" alt="gambar"><br> <!-- tentukan letak script generate gambar -->
             <label for="kodecaptcha">Isikan Captcha</label>
             <input type="text" class="custom-form-control" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
 
