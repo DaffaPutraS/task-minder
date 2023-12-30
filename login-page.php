@@ -23,18 +23,26 @@
             <img src="img/buku.png" alt="Books Image"/>
         </div>
         <div class="form">
-            <h2>Sign In</h2>
-            <label for="nama"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="nama" required>
+            <form action="proses/login.php" method="POST">
+                <h2>Sign In</h2>
 
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+                <input type="text" placeholder="Username" name="username" required>
+                
+                <input type="password" placeholder="Password" name="password" required>
 
-            <img src="proses/captcha.php" alt="gambar"><br> <!-- tentukan letak script generate gambar -->
-            <label for="kodecaptcha">Isikan Captcha</label>
-            <input type="text" class="custom-form-control" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
+                <div class="captcha">
+                    <img src="proses/captcha.php" alt="gambar"><br>
+                </div>
 
-            <button type="submit" class="btn">Login</button>
+                <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
+
+                <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
+                
+                <div class="href-register">
+                    <p>Belum punya account? <a href="register-page.php">Register</a></p>
+                </div>
+            </form>
+
         </div>
     </section>
     
