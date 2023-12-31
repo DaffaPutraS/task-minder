@@ -26,8 +26,12 @@
     flex: 1;
 }
 
+.Logo img {
+  width: 8%;
+}
+
 nav .Logo {
-  max-height: 100%; 
+  
 }
 
 nav ul{

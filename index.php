@@ -20,22 +20,24 @@
 <body>
     <!-- navbar -->
     <nav>
-        <div class="Logo">
-          <img src="img/logo.png" alt="Icon Task-Minder" type="image/x-icon">
-          <!-- <h1>Task-Minder</h1> -->
-        </div>
-        <ul>
-          <li><a href="" >To-Do</a></li>
-          <li><a href="" >In-Progress</a></li>
-          <li><a href="" >Completed</a></li>
-        </ul>
-        <!-- Hamburger Menu -->
-        <div class="menu-toggle">
-          <input type="checkbox" />
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </nav>
+        
+            <div class="Logo">
+                <a href=""><img src="img/logo.png" alt="Icon Task-Minder" type="image/x-icon"></a>
+                <!-- <h1>Task-Minder</h1> -->
+            </div>
+            <ul>
+                <li><a href="" >To-Do</a></li>
+                <li><a href="" >In-Progress</a></li>
+                <li><a href="" >Completed</a></li>
+            </ul>
+            <!-- Hamburger Menu -->
+            <div class="menu-toggle">
+                <input type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        
+    </nav>
 </body>
 </html>
