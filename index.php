@@ -20,8 +20,7 @@
 <body>
     <!-- navbar -->
     <nav>
-        
-            <div class="Logo">
+            <div class="logo">
                 <a href=""><img src="img/logo.png" alt="Icon Task-Minder" type="image/x-icon"></a>
                 <!-- <h1>Task-Minder</h1> -->
             </div>
@@ -37,7 +36,8 @@
                 <span></span>
                 <span></span>
             </div>
-        
     </nav>
+
+    <script src="js/javascript-index.js" ></script>
 </body>
 </html>

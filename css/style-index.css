@@ -1,38 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Montserrat:wght@600&family=Mulish:wght@500&family=Open+Sans:wght@500&family=Poppins&display=swap');
+
+:root {
+    --main-color: #57C5B6;
+    --second-color: #159895;
+    --third-color: #1A5F7A;
+    --fourth-color: #002B5B;
+    --black: #333;
+    --white: #fff;
+    --border:.2rem solid var(--black);
+    --border2:.2rem solid var(--white);
+    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+
 * {
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
   }
 
-  body{
-    background-color: white;
-  }
-
-  nav{
-    display: flex;
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    background-color: rgba(43, 203, 121, 0.9);
-    height: 50px;
-    justify-content: space-around;
-    align-items: center;
-    box-shadow: 0 7px 15px 0 rgb(9, 103, 9);
-    border-bottom-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
+body{
+  background-color: var(--third-color);
+  overflow-x: hidden;
 }
 
-.Logo {
-    flex: 1;
+nav{
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  background-color: var(--second-color);
+  height: 50px;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 7px 15px 0 var(--third-color);
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
-.Logo img {
-  width: 8%;
+.logo img {
+  max-width: 25%;
+  width: 15%;
 }
-
-/* nav .Logo {
-  max-height: 100%; 
-} */
 
 nav ul{
   display: flex;    
@@ -40,15 +48,14 @@ nav ul{
   width: 40%;
   font-family: 'poppins';
   justify-content: space-between;
-  margin-right: 1rem;
   transition: all .40s;
-  }
+}
 
 nav ul li a{
   position: relative;
-  color: cyan;
+  color: var(--main-color);
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 ul li a::after{
@@ -58,7 +65,7 @@ ul li a::after{
   height: 2px;
   left: 0;
   bottom: -2px;
-  background:cyan;
+  background:var(--main-color);
   transition: all .40s;
 }
 
@@ -71,6 +78,7 @@ ul li a:hover::after{
   flex-direction: column;
   height: 15px;
   justify-content: space-between;
+  margin-right: 1.5rem;
   position: relative;
 }
 
@@ -78,7 +86,7 @@ ul li a:hover::after{
   display: block;
   width: 28px;
   height: 3px;
-  background-color: beige;
+  background-color: var(--main-color);
   border-radius: 3px;
   transition: all 0.4s;
 }
@@ -106,15 +114,66 @@ ul li a:hover::after{
 
 .menu-toggle input:checked ~ span:nth-child(2){
   transform: rotate(45deg) translate(-5px, -5px);
-  background-color: white;
+  background-color: var(--main-color);
 }
 
 .menu-toggle input:checked ~ span:nth-child(4){
   transform: rotate(-45deg) translate(-1px, -1px);
-  background-color: white;
+  background-color: var(--main-color);
 }
 
 .menu-toggle input:checked ~ span:nth-child(3){
   transform: scale(0);
   opacity: 0;
+}
+
+/* Responsive nav */
+
+/* Ukuran landscape hp (tab) */
+
+@media screen and (max-width: 768px){
+  nav ul {
+    width: 50%;
+  }
+
+  .logo {
+    width: 40%;
+  }
+
+  .logo img {
+    width: 50%;
+  }
+}
+
+/* Ukuran potrait hp */
+@media screen and (max-width: 576px){
+  .menu-toggle{
+    display: flex;
+  }
+  
+  nav ul { 
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(26, 95, 122, 0.7);
+    z-index: -1;
+    transform: translateX(100%);
+    transition: all 1s;
+    opacity: 0;
+  }
+  
+  nav ul.slide {
+    opacity: 1;
+    z-index: 2;
+    transform: translateX(0);
+  }
+
+  .logo {
+    width: 70%;
+  }
 }
