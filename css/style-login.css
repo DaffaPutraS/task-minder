@@ -115,21 +115,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=kodecaptcha]:focu
     transition: box-shadow 0.2s ease; /* Add transition property for box-shadow on focus */
 }
 
-/* .btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
-}
-
-.btn:hover {
-    opacity:1;
-} */
-
 .login-container .form .captcha {
     display: flex;
     justify-content: center;
@@ -222,4 +207,58 @@ input[type=text]:focus, input[type=password]:focus, input[type=kodecaptcha]:focu
         transform: translateY(0);
         }
     
+}
+
+@media screen and (max-width: 1280px) {
+    body {
+        background-image: none;
+        background-position: none;
+        background-size: none;
+        background-attachment: none;
+    }
+
+    .background {
+        background-color: var(--second-color);
+    }
+
+    .login-container .book-img {
+        display: none; /* Gambar book-img dihilangkan */
+    }
+
+    .login-container {
+        padding: 0 5rem;
+        margin: auto;
+        max-width: 80%;
+    }
+
+    .login-container .form {
+        /* padding-right: 2rem; Mengurangi padding-right agar form tetap terlihat seimbang */
+        /* margin-top: 5rem; Menengahkan form secara vertikal */
+        background-color: white;
+        padding: 0 1rem;
+        width: 100%;
+        border: 1px solid rgb(192, 192, 192);
+        border-radius: 10px;
+    }
+
+    .login-container .form h2 {
+        margin-top: 2.5rem;
+    }
+
+    .login-container .form p {
+        margin-bottom: 2.5rem;
+    }
+    /* Opsional: Menyesuaikan lebar input pada resolusi kecil */
+    /* input[type=text], input[type=password], input[type=kodecaptcha] {
+        width: calc(100% - 30px); 
+    } */
+}
+
+
+@media screen and (max-width: 700px) {
+    .login-container {
+        padding: 0 10px;
+        margin: auto;
+        max-width: 100%;
+    }
 }

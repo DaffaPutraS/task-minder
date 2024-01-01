@@ -18,33 +18,34 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <section class="login-container">
-        <div class="book-img">
-            <img src="img/buku.png" alt="Books Image"/>
-        </div>
-        <div class="form">
-            <form action="proses/login.php" method="POST">
-                <h2>Sign In</h2>
+    <!-- Navbar Section -->
+    <div class="background">    
+        <section class="login-container">
+            <div class="book-img">
+                <img src="img/buku.png" alt="Books Image"/>
+            </div>
+            <div class="form">
+                <form action="proses/login.php" method="POST">
+                    <h2><b>Sign In</b></h2>
 
-                <input type="text" placeholder="Username" name="username" required>
-                
-                <input type="password" placeholder="Password" name="password" required>
+                    <input type="text" placeholder="Username" name="username" required>
+                    
+                    <input type="password" placeholder="Password" name="password" required>
 
-                <div class="captcha">
-                    <img src="proses/captcha.php" alt="gambar"><br>
-                </div>
+                    <div class="captcha">
+                        <img src="proses/captcha.php" alt="gambar"><br>
+                    </div>
 
-                <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
+                    <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
 
-                <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
-                
-                <div class="href-register">
-                    <p>Belum punya account? <a href="register-page.php">Register</a></p>
-                </div>
-            </form>
-
-        </div>
-    </section>
-    
+                    <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
+                    
+                    <div class="href-register">
+                        <p>Belum punya account? <a href="register-page.php">Register</a></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
