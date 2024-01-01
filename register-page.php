@@ -22,28 +22,28 @@
     <div class="background">    
         <section class="register-container">
             <div class="form">
-                <form action="proses/login.php" method="POST">
+                <form action="proses/register.php" method="POST">
                     <h2><b>Sign Up</b></h2>
-                    <div>
+                    <div class="input-name">
                         <input type="text" placeholder="Name" id="name" name="name" required>
                     </div>
-                    <div>
+                    <div class="input-email">
                         <input type="email" placeholder="Email" id="InputEmail" name="email" required>
                     </div>
-                    <div>
+                    <div class="input-username">
                         <input type="text" placeholder="Username" id="username" name="username" required>
                     </div>
-                    <div>
+                    <div class="input-password">
                         <input type="password" placeholder="Password" id="InputPassword" name="password" required>
                     </div>
-                    <div>
+                    <div class="input-repassword">
                         <input type="password" placeholder="Re-Password" id="InputRePassword" name="repassword" required>
                     </div>
                     
-                    <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
+                    <button class="bn632-hover bn18" type="submit" name="submit" >Register</button>
                     
                     <div class="href-register">
-                        <p>Sudah punya accountt? <a href="login-page.php">Login</a></p>
+                        <p>Sudah punya account? <a href="login-page.php">Login</a></p>
                     </div>
                 </form>
             </div>

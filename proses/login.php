@@ -6,7 +6,7 @@ $error = '';
 $validate = '';
 
 if (isset($_SESSION['username'])) {
-    header('Location: index.php');
+    header('Location: ../index.php');
 }
 
 if (isset($_POST['submit'])) {
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
                 $hash  = mysqli_fetch_assoc($result)['password'];
                 if (password_verify($password, $hash)) {
                     $_SESSION['username'] = $username;
-                    header('Location: index.php');
+                    header('Location: ../index.php');
                     exit();
                 } else {
                     $error = '<span class="error">Password tidak cocok !!</span>';

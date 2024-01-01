@@ -28,16 +28,19 @@
                 <form action="proses/login.php" method="POST">
                     <h2><b>Sign In</b></h2>
 
-                    <input type="text" placeholder="Username" name="username" required>
-                    
-                    <input type="password" placeholder="Password" name="password" required>
-
+                    <div class="input-username">
+                        <input type="text" placeholder="Username" name="username" required>
+                    </div>
+                    <div class="input-password">
+                        <input type="password" placeholder="Password" name="password" required>
+                    </div>
                     <div class="captcha">
                         <img src="proses/captcha.php" alt="gambar"><br>
                     </div>
-
-                    <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
-
+                    <div class="input-captcha">
+                        <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
+                    </div>
+                    
                     <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
                     
                     <div class="href-register">

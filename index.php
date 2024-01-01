@@ -1,3 +1,14 @@
+<?php
+//inisialisasi session 
+session_start();
+
+//mengecek username pada session
+if(!isset($_SESSION['username'])){
+    $_SESSION['msg'] = 'anda harus login untuk mengakses halaman ini'; 
+    header('Location: login-page.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +39,7 @@
                 <li><a href="" >To-Do</a></li>
                 <li><a href="" >In-Progress</a></li>
                 <li><a href="" >Completed</a></li>
+                <li><a href="proses/logout.php">Logout</a></li>
             </ul>
             <!-- Hamburger Menu -->
             <div class="menu-toggle">

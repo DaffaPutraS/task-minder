@@ -94,19 +94,17 @@ input[type=text], input[type=password], input[type=kodecaptcha] {
     transition: box-shadow 0.2s ease;
 }
 
-input[type=text] {
+.input-username{
     animation: fade-in2 0.7s backwards;
 }
 
-input[type=password] {
+.input-password{
     animation: fade-in2 0.8s backwards;
 }
 
-input[type=kodecaptcha] {
+.input-captcha{
     animation: fade-in2 1s backwards;
 }
-
-
 
 input[type=text]:focus, input[type=password]:focus, input[type=kodecaptcha]:focus {
     background-color: #f1f1f1;

@@ -6,7 +6,7 @@ $error = '';
 $validate = '';
 
 if (isset($_SESSION['user'])) {
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 
 if (isset($_POST['submit'])) {
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
 
                 if ($result) {
                     $_SESSION['username'] = $username;
-                    header('Location: index.php');
+                    header('Location: ../index.php');
                 } else {
                     $error = 'Register User Gagal !!';
                 }

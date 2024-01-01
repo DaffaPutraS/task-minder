@@ -94,17 +94,26 @@ input[type=text], input[type=password], input[type=email] {
     transition: box-shadow 0.2s ease;
 }
 
-input[type=text] {
+.input-name {
     animation: fade-in2 0.7s backwards;
 }
 
-input[type=password] {
-    animation: fade-in2 0.7s backwards;
+.input-email {
+    animation: fade-in2 0.8s backwards;
 }
 
-input[type=email] {
-    animation: fade-in2 0.7s backwards;
+.input-username {
+    animation: fade-in2 0.9s backwards;
 }
+
+.input-password {
+    animation: fade-in2 1s backwards;
+}
+
+.input-repassword {
+    animation: fade-in2 1.1s backwards;
+}
+
 
 
 
@@ -143,7 +152,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=kodecaptcha]:focu
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
-    animation: fade-in2 0.7s backwards;
+    animation: fade-in2 1.2s backwards;
 }
 
 .register-container .form .bn632-hover:hover {
@@ -173,7 +182,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=kodecaptcha]:focu
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    animation: fade-in2 0.7s backwards;
+    animation: fade-in2 1.3s backwards;
 }
 
 .register-container .form .href-register a {
