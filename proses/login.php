@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     $captchaSession = $_SESSION['code'];
 
     if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
-        echo '<script>alert("Captcha salah"); window.location="login.php"</script>';
+        echo '<script>alert("Captcha salah"); window.location="../login-page.php"</script>';
     } else {
         if (!empty(trim($username)) && !empty(trim($password))) {
             $query  = "SELECT * FROM users WHERE username = '$username'";
