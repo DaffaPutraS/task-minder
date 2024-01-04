@@ -49,6 +49,7 @@ if(!isset($_SESSION['username'])){
                 <span></span>
             </div>
             <h1>Test</h1>
+            <h2>Belajar Git untuk project CCIT</h2>
     </nav>
 
     <script src="js/javascript-index.js" ></script>
