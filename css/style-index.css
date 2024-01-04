@@ -177,3 +177,9 @@ ul li a:hover::after{
     width: 70%;
   }
 }
+
+@media screen and(max-width:850px) {
+  li a {
+    font-size: 1px;
+  }
+}
