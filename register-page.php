@@ -19,7 +19,7 @@
 </head>
 <body>
     <!-- Navbar Section -->
-    <div class="background">    
+    <div class="background"> 
         <section class="register-container">
             <div class="form">
                 <form action="proses/register.php" method="POST">
@@ -28,7 +28,7 @@
                         <input type="text" placeholder="Name" id="name" name="name" required>
                     </div>
                     <div class="input-email">
-                        <input type="email" placeholder="Email" id="InputEmail" name="email" required>
+                        <input type="text" placeholder="Email" id="InputEmail" name="email" required>
                     </div>
                     <div class="input-username">
                         <input type="text" placeholder="Username" id="username" name="username" required>
@@ -52,5 +52,7 @@
             </div>
         </section>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6pZl3/JfxI65qD5V/s2IeVFYfH9SmoQ5" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -9,47 +9,58 @@ if(!isset($_SESSION['username'])){
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | TaskMinder</title>
-
-    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="css/style-index.css">
-
-    <!--- Bootstrap Link-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
     <!-- Icon Title Link-->
     <link rel="Icon" href="img/logo.png" type="image/x-icon">
-
-    <!-- Font Awesome CDN Link -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<body>
-    <!-- navbar -->
-    <nav>
-            <div class="logo">
-                <a href=""><img src="img/logo.png" alt="Icon Task-Minder" type="image/x-icon"></a>
-                <!-- <h1>Task-Minder</h1> -->
-            </div>
-            <ul>
-                <li><a href="" >To-Do</a></li>
-                <li><a href="" >In-Progress</a></li>
-                <li><a href="" >Completed</a></li>
-                <li><a href="proses/logout.php">Logout</a></li>
-            </ul>
-            <!-- Hamburger Menu -->
-            <div class="menu-toggle">
-                <input type="checkbox" />
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-    </nav>
 
-    <script src="js/javascript-index.js" ></script>
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header_toggle"> 
+            <i class='bx bx-menu' id="header-toggle"></i> 
+        </div>
+        <div class="header_btn_plus">
+            <i class='bx bx-plus'></i>
+        </div>
+        <div class="header_img" id="profile-menu"> 
+            <img src="img/profile-picture.png" alt=""> 
+            <div class="profile-options">
+                <a href="#" class="profile-option" id="profile-link"><?php echo $_SESSION['username']; ?></a>
+            </div>
+        </div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div> 
+                <a href="#" class="nav_logo"><img src="img/logo.png" alt=""></i> <span class="nav_logo-name">TaskMinder</span> </a>
+                <div class="nav_list"> 
+                    <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i><span class="nav_name">Dashboard</span> </a> 
+                    <a href="#" class="nav_link"> <i class='bx bxs-calendar nav_icon'></i> <span class="nav_name">Calender</span> </a> 
+                </div>
+            </div> 
+            <a href="proses/logout.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+        </nav>
+    </div>
+    <!--Container Main start-->
+    <div class="height-100 bg-light">
+        <h4>Main Components</h4>
+    </div>
+    <!--Container Main end-->
+
+    <script src="js/index.js"></script>
+    <script src="js/dropdown-profile-index.js"></script>
 </body>
 </html>

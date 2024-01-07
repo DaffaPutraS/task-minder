@@ -1,3 +1,51 @@
+<?php
+require('proses/koneksi.php');
+session_start();
+
+$error = '';
+$validate = '';
+
+if (isset($_SESSION['username'])) {
+    header('Location: index.php');
+    exit();
+}
+
+if (isset($_POST['submit'])) {
+    $username = stripslashes($_POST['username']);
+    $username = mysqli_real_escape_string($koneksi, $username);
+    $password = stripslashes($_POST['password']);
+    $password = mysqli_real_escape_string($koneksi, $password);
+
+    $userCaptcha = $_POST['kodecaptcha'];
+    $captchaSession = $_SESSION['code'];
+
+    if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
+        echo '<script>alert("Captcha salah"); window.location="login-page.php"</script>';
+    } else {
+        if (!empty(trim($username)) && !empty(trim($password))) {
+            $query  = "SELECT * FROM users WHERE username = '$username'";
+            $result = mysqli_query($koneksi, $query);
+            $rows   = mysqli_num_rows($result);
+
+            if ($rows != 0) {
+                $hash  = mysqli_fetch_assoc($result)['password'];
+                if (password_verify($password, $hash)) {
+                    $_SESSION['username'] = $username;
+                    header('Location: index.php');
+                    exit();
+                } else {
+                    // Password salah
+                    $error = 'Password salah !!';
+                }
+            } else {
+                // Username salah
+                $error = 'Username tidak ditemkan';
+            }
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,14 +66,22 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <!-- Navbar Section -->
-    <div class="background">    
+
+    <div class="background">
+    <?php
+        if ($error) {
+            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 300px; position: fixed; top: 20px; right: 20px;">
+                    <strong>Error!</strong> ' . $error . '
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+        }
+        ?>    
         <section class="login-container">
             <div class="book-img">
                 <img src="img/buku.png" alt="Books Image"/>
             </div>
             <div class="form">
-                <form action="proses/login.php" method="POST">
+                <form action="login-page.php" method="POST">
                     <h2><b>Sign In</b></h2>
 
                     <div class="input-username">
@@ -50,5 +106,12 @@
             </div>
         </section>
     </div>
+
+    
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6pZl3/JfxI65qD5V/s2IeVFYfH9SmoQ5" crossorigin="anonymous"></script>
+    
+    <!-- ... (setelah modal) -->
 </body>
 </html>

@@ -117,7 +117,7 @@ input[type=text], input[type=password], input[type=email] {
 
 
 
-input[type=text]:focus, input[type=password]:focus, input[type=kodecaptcha]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
     background-color: #f1f1f1;
     outline: none;
     box-shadow: 0 0 6px var(--second-color); /* Add box-shadow on focus */
