@@ -5,6 +5,8 @@ session_start();
 $error = '';
 $validate = '';
 
+$_SESSION['user_id'] = $user_id; // Simpan informasi user_id ke dalam session
+
 if (isset($_SESSION['username'])) {
     header('Location: ../index.php');
 }
