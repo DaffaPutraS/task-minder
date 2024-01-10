@@ -1,0 +1,35 @@
+/* style-login-admin.css */
+
+/* Add your custom styles here */
+body {
+    background-color: #ffffff;
+    color: #000000; /* Set text color to white for better visibility */
+}
+
+.container {
+    margin-top: 50px;
+}
+
+/* Style the table with Bootstrap classes */
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    color: #000000; /* Set text color to white for better visibility */
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6; /* Bootstrap border color */
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6; /* Bootstrap border color */
+    background-color: #2c77c2; /* Bootstrap dark background color */
+}
+
+/* Add more styles as needed */

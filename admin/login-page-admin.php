@@ -1,5 +1,5 @@
 <?php
-require('proses/koneksi.php');
+require('../proses/koneksi.php');
 session_start();
 
 $error = '';
@@ -20,18 +20,25 @@ if (isset($_POST['submit'])) {
     $captchaSession = $_SESSION['code'];
 
     if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
-        echo '<script>alert("Captcha salah"); window.location="login-page.php"</script>';
+        echo '<script>alert("Captcha salah"); window.location="index-admin.php"</script>';
     } else {
         if (!empty(trim($username)) && !empty(trim($password))) {
-            $query  = "SELECT * FROM users WHERE username = '$username'";
+            // Update the table name and column names
+            $query  = "SELECT * FROM admin WHERE username = '$username'";
             $result = mysqli_query($koneksi, $query);
             $rows   = mysqli_num_rows($result);
 
             if ($rows != 0) {
-                $hash  = mysqli_fetch_assoc($result)['password'];
+                $adminData = mysqli_fetch_assoc($result);
+                $hash  = $adminData['password'];
                 if (password_verify($password, $hash)) {
+                    // Assigning admin information to the session
+                    $_SESSION['admin_id'] = $adminData['admin_id'];
+                    $_SESSION['name'] = $adminData['name'];
                     $_SESSION['username'] = $username;
-                    header('Location: index.php');
+                    $_SESSION['email'] = $adminData['email'];
+            
+                    header('Location: index-admin.php'); // Update the redirection here
                     exit();
                 } else {
                     // Password salah
@@ -39,7 +46,7 @@ if (isset($_POST['submit'])) {
                 }
             } else {
                 // Username salah
-                $error = 'Username tidak ditemkan';
+                $error = 'Username tidak ditemukan';
             }
         }
     }
@@ -54,7 +61,7 @@ if (isset($_POST['submit'])) {
     <title>Login</title>
 
     <!-- CSS only -->
-    <link rel="stylesheet" href="css/style-login.css">
+    <link rel="stylesheet" href="../css/style-login.css">
 
     <!--- Bootstrap Link-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -78,10 +85,10 @@ if (isset($_POST['submit'])) {
         ?>    
         <section class="login-container">
             <div class="book-img">
-                <img src="img/buku.png" alt="Books Image"/>
+                <img src="../img/buku.png" alt="Books Image"/>
             </div>
             <div class="form">
-                <form action="login-page.php" method="POST">
+                <form action="index-admin.php" method="POST">
                     <h2><b>Sign In</b></h2>
 
                     <div class="input-username">
@@ -91,7 +98,7 @@ if (isset($_POST['submit'])) {
                         <input type="password" placeholder="Password" name="password" required>
                     </div>
                     <div class="captcha">
-                        <img src="proses/captcha.php" alt="gambar"><br>
+                        <img src="../proses/captcha.php" alt="gambar"><br>
                     </div>
                     <div class="input-captcha">
                         <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
