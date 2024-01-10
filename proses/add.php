@@ -20,7 +20,7 @@
 // Input ke db
 if ($accdata) {
     mysqli_query($koneksi,"INSERT INTO task VALUES('', '$username','$taskname','$date','$description')");
-    echo '<script>alert("Yeay berhasil nambah tugas, Semangat !"); window.location="../index.php"</script>';
+    echo '<script>alert("Yeay berhasil nambah tugas, Semangat !"); window.location="../dashboard.php"</script>';
     exit();   
 } else {
     $accdata = false;

@@ -8,7 +8,7 @@ $validate = '';
 $_SESSION['username'] = $username; // Simpan informasi user_id ke dalam session
 
 if (isset($_SESSION['username'])) {
-    header('Location: ../index.php');
+    header('Location: ../dashboard.php');
 }
 
 if (isset($_POST['submit'])) {

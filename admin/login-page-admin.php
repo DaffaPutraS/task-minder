@@ -89,7 +89,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="form">
                 <form action="index-admin.php" method="POST">
-                    <h2><b>Sign In</b></h2>
+                    <h2><b>Admin Only!</b></h2>
 
                     <div class="input-username">
                         <input type="text" placeholder="Username" name="username" required>
@@ -106,9 +106,9 @@ if (isset($_POST['submit'])) {
                     
                     <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
                     
-                    <div class="href-register">
+                    <!-- <div class="href-register">
                         <p>Belum punya account? <a href="register-page.php">Register</a></p>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </section>
