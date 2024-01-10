@@ -7,14 +7,14 @@
 
         // Mengambil data inputan 
         $id = $_POST["task_id"];
-        $userid = $_POST["user_id"];
+        $username = $_POST["username"];
         $taskname = $_POST["task_name"];
         $date = $_POST["date"];
         $description = $_POST["description"];
 
         // Update ke database
         $query = "UPDATE task SET
-                    user_id = '$userid',
+                    username = '$username',
                     task_name = '$taskname',
                     date = '$date',
                     description = '$description'

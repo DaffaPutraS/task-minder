@@ -2,20 +2,16 @@
     require("koneksi.php"); // Connect ke DB
     session_start();
     
-    require("login.php"); // Butuh login.php ? 
+    // require("login.php"); // Butuh login.php ? 
 
-
-    // Ngambil data dari form
-        // $userid = isset($_POST["user_id"]) ? $_POST["user_id"] : $user_id; (salahh)
-
-    $userid = $_POST["user_id"];
+    $username = $_POST["username"];
     $taskname = $_POST["task_name"];
     $date = $_POST["date"];
     $description = $_POST["description"];
 
     $accdata = true;
 
-    if (empty($userid) || empty($taskname) || empty($date) || empty($description)) {
+    if (empty($username) || empty($taskname) || empty($date) || empty($description)) {
         $accdata = false;
         echo '<script>alert("Ada yang belum diisi tuh"); window.location="../add-page.php"</script>';
         exit();
@@ -23,8 +19,8 @@
 
 // Input ke db
 if ($accdata) {
-    mysqli_query($koneksi,"INSERT INTO task VALUES('', '$userid','$taskname','$date','$description')");
-    echo '<script>alert("Yeay berhasil nambah tugas, Semangat !"); window.location="../show-page.php"</script>';
+    mysqli_query($koneksi,"INSERT INTO task VALUES('', '$username','$taskname','$date','$description')");
+    echo '<script>alert("Yeay berhasil nambah tugas, Semangat !"); window.location="../index.php"</script>';
     exit();   
 } else {
     $accdata = false;

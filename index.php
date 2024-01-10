@@ -61,9 +61,12 @@ if(!isset($_SESSION['username'])){
         <!-- Logika untuk narik data menggunakan bahasa PHP -->
         <?php 
             require("proses/koneksi.php");
+            
+            // Mengambil nilai user_id dari session
+            $username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 
-            $retrieveData = mysqli_query($koneksi, "SELECT * FROM task");
-
+            $retrieveData = mysqli_query($koneksi, "SELECT * FROM task WHERE username = '$username'");
+            
             $page = (isset($_GET['page'])) ? (int) $_GET['page'] : 1;
 
             // Limit data per page

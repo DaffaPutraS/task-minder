@@ -46,7 +46,7 @@
                 <td>Id Akun</td>
                 <td>
                     <input type="hidden" name="task_id" value="<?php echo $d['task_id']; ?>" >
-                    <input type="text" name="user_id" placeholder="ID Akun" value="<?php echo $d['user_id']; ?>" >
+                    <input type="text" name="username" placeholder="ID Akun" value="<?php echo $d['username']; ?>" >
                 </td>
             </tr>
             <tr>

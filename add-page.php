@@ -10,7 +10,7 @@
 }
 
     // Mengambil nilai user_id dari session
-    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+    $username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 ?>
 
 <!DOCTYPE html>
@@ -38,8 +38,8 @@
         <h1 class="text-center display-4" >Add Page</h1>
         <table>
             <tr>
-                <!-- <td>Id Akun</td> -->
-                <td><input type="hidden" name="user_id" value="<?php echo $user_id; ?>" readonly></td>
+                <td>Username</td>
+                <td><input type="text" name="username" value="<?php echo $username; ?>" readonly></td>
             </tr>
             <tr>
                 <td>Nama Task</td>

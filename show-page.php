@@ -98,7 +98,6 @@
         font-size: 0.8em;
     }
     </style>
-
 </head>
 <body>
     <h2 class="text-center display-4">Task List</h2>
@@ -128,7 +127,7 @@
         ?>
         <tr>
             <td><?php echo $no++; ?></td>
-            <td><?php echo $row['user_id']; ?></td>
+            <td><?php echo $row['username']; ?></td>
             <td><?php echo $row['task_name'] ; ?></td>
             <td><?php echo $row['date'] ; ?></td>
             <td><?php echo $row['description'] ; ?></td>
