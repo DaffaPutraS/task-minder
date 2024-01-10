@@ -1,0 +1,512 @@
+@import url("https://fonts.googleapis.com/css2?family=Merienda+One&family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
+:root {
+  --main-color: #57C5B6;
+  --second-color: #159895;
+  --third-color: #1A5F7A;
+  --fourth-color: #002B5B;
+  --black: #333;
+  --white: #fff;
+  --light-color: #666;
+  --border:.2rem solid var(--black);
+  --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+*::-moz-selection {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+*::selection {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.heading h3 {
+  font-size: 4rem;
+  color: var(--black);
+  font-family: "Merienda One", cursive;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: var(--main-color);
+  cursor: pointer;
+  color: var(--white);
+  font-size: 1.8rem;
+  padding: 1rem 3rem;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  background-color: var(--black);
+}
+
+.header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+}
+
+.header .flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 1.2rem 2rem;
+}
+
+.header .flex .logo img {
+  height: 5rem;
+}
+
+.header .flex .navbar span {
+  background-color: var(--main-color);
+  border-radius: 6px;
+  padding: 5px 10px;
+  color: var(--white);
+}
+
+.header .flex .navbar span:hover {
+  background-color: var(--third-color);
+}
+
+.header .flex .navbar a {
+  margin: 1rem;
+  font-size: 2rem;
+  color: var(--black);
+  font-family: 'roboto', sans-serif;
+}
+
+.header .flex .navbar a:hover {
+  text-decoration: underline;
+  color: var(--main-color);
+}
+
+#menu-btn {
+  display: none;
+  font-size: 2.5rem;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.home-bg {
+  background: url(../img/background-home-page-2.png) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.home-bg .home {
+  min-height: 70rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-bg .home .content {
+  width: 60rem;
+  text-align: center;
+}
+
+.home-bg .home .content h3 {
+  font-size: 6rem;
+  color: var(--black);
+  font-family: "Merienda One", cursive;
+}
+
+.home-bg .home .content p {
+  padding: 1rem 0;
+  font-size: 1.45rem;
+  color: var(--black);
+  line-height: 2;
+  font-family: 'poppins', sans-serif;
+}
+
+.home-bg .home .content a {
+  font-family: 'poppins', sans-serif;
+  font-size: 1.6rem;
+}
+
+.about {
+  margin-top: 6rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+
+.about .image {
+  flex: 1 1 40rem;
+}
+
+.about .image img {
+  width: 100%;
+}
+
+.about .content {
+  flex: 1 1 40rem;
+}
+
+.about .content h3 {
+  font-size: 4rem;
+  color: var(--black);
+  font-family: "Merienda One", cursive;
+  padding-bottom: 1rem;
+}
+
+.about .content p {
+  padding: 1rem 0;
+  line-height: 2;
+  color: var(--light-color);
+  font-size: 1.4rem;
+  font-family: 'poppins', sans-serif;
+}
+
+.about .btn-about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about .btn-about a {
+  font-family: 'poppins', sans-serif;
+  font-size: 1.6rem;
+}
+
+.menu {
+  margin-top: 7rem;
+}
+
+.menu .box-container {
+  padding-top: 5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 30rem);
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.menu .box-container .box {
+  text-align: center;
+  margin: 5%;
+  cursor: pointer;
+}
+
+/* .menu .box-container .box:hover {
+  background-color: var(--main-color);
+  transition: 0.3s ease;
+}
+
+.menu .box-container .box:active {
+  background-color: var(--black);
+}
+.menu .box-container .box:active h3 {
+  color: var(--white);
+}
+.menu .box-container .box:active p {
+  color: var(--white);
+} */
+
+.menu .box-container .box img {
+  width: 190px;
+  height: 150px;
+  margin-bottom: 2rem;
+}
+
+.menu .box-container .box h3 {
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.menu .box-container .box p {
+  font-size: 15px;
+  padding-top: 4%;
+  font-size: 1.25rem;
+  font-family: 'poppins', sans-serif;
+}
+
+.menu .tekstambah {
+  text-align: center;
+  margin: 3%;
+}
+
+.menu .tekstambah h3 {
+  font-size: 3rem;
+}
+
+.menu .tekstambah p {
+  font-size: 1.7rem;
+  padding: 1%;
+}
+
+.about2 {
+  margin-top: 6rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+
+.about2 .image {
+  flex: 1 1 40rem;
+}
+
+.about2 .image img {
+  width: 100%;
+}
+
+.about2 .content {
+  flex: 1 1 40rem;
+}
+
+.about2 .content h3 {
+  font-size: 4rem;
+  color: var(--black);
+  font-family: "Merienda One", cursive;
+  padding-bottom: 1rem;
+}
+
+.about2 .content p {
+  padding: 1rem 0;
+  line-height: 2;
+  color: var(--light-color);
+  font-size: 1.4rem;
+  font-family: 'poppins', sans-serif;
+}
+
+.about2 .btn-daftar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about2 .btn-daftar a {
+  font-family: 'poppins', sans-serif;
+  font-size: 1.6rem;
+}
+
+.footer .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.footer .box-container .box {
+  text-align: center;
+}
+
+.footer .box-container .box i {
+  font-size: 2.5rem;
+  line-height: 6rem;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.footer .box-container .box h3 {
+  margin: 1rem 0;
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.footer .box-container .box p {
+  line-height: 2rem;
+  font-size: 1.6rem;
+  color: var(--light-color);
+  margin: 1rem 0;
+}
+
+.footer .credit {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: var(--border);
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.footer .credit span {
+  color: var(--main-color);
+}
+
+.footer .credit a i {
+  color: var(--main-color);
+}
+
+.footer .credit a i:hover {
+  text-decoration: none;
+  color: var(--third-color);
+}
+
+@-webkit-keyframes animate {
+  0% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: scaleY(0);
+  }
+}
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+
+  .order form .inputbox .input {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  #menu-btn {
+    display: inline-block;
+    transition: 0.2s linear;
+  }
+
+  #menu-btn.fa-times {
+    transform: rotate(180deg);
+  }
+
+  .header .flex .navbar {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border-top: var(--border);
+    border-bottom: var(--border);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: 0.2s linear;
+  }
+
+  .header .flex .navbar.active {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .header .flex .navbar a {
+    display: block;
+    margin: 2rem;
+  }
+
+  .home-bg {
+    background-position: left;
+  }
+
+  .home-bg .home {
+    justify-content: center;
+  }
+
+  .home-bg .home .content h3 {
+    font-size: 4rem;
+  }
+
+  .about .content h3 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .about .content p {
+    text-align: center;
+  }
+
+  .menu .heading h3 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .team .heading h3 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .reservation .heading h3 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 3%;
+  }
+
+  .orderfeatures .heading h3 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 3%;
+  }
+
+  .contactus .heading h3 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 3%;
+  }
+
+  .contactus .row form h3 {
+    font-size: 2rem;
+  }
+
+  .faq .container .heading h3 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 3%;
+  }
+
+  .order .heading h3 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 3%;
+  }
+}
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+}/*# sourceMappingURL=style.css.map */
