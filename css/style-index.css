@@ -440,9 +440,9 @@ section {
     margin: 2rem;
   }
 
-  .home-bg {
+  /* .home-bg {
     background-position: left;
-  }
+  } */
 
   .home-bg .home {
     justify-content: center;

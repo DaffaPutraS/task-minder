@@ -104,7 +104,7 @@ if(!isset($_SESSION['username'])){
     </div>
     <!--Container Main end-->
 
-    <script src="js/index.js"></script>
-    <script src="js/dropdown-profile-index.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/dropdown-profile-dashboard.js"></script>
 </body>
 </html>
