@@ -21,7 +21,7 @@
     <title>Add Page | TaskMinder</title>
 
     <!-- CSS only -->
-    <link rel="stylesheet" href="css/style-index.css">
+    <link rel="stylesheet" href="css/style-add-page.css">
 
     <!--- Bootstrap Link-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -34,30 +34,35 @@
 
 </head>
 <body>
-    <form action="proses/add.php" method="post">
-        <h1 class="text-center display-4" >Add Page</h1>
-        <table>
-            <tr>
-                <td>Username</td>
-                <td><input type="text" name="username" value="<?php echo $username; ?>" readonly></td>
-            </tr>
-            <tr>
-                <td>Nama Task</td>
-                <td><input type="text" name="task_name" placeholder="Nama Tugas" ></td>
-            </tr>
-            <tr>
-                <td>Tanggal Deadline</td>
-                <td><input type="date" name="date" class="datepicker" ></td>
-            </tr>
-            <tr>
-                <td>Deksripsi Tugas</td>
-                <td><textarea name="description" id="deskripsi" cols="22" rows="5" placeholder="Deskripsi Tugas" ></textarea></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Save Data" ></td>
-            </tr>
-        </table>
-    </form>
+    <div class="container">
+        <div class="title">Add Page</div>
+            <form action="proses/add.php" method="post">
+                <div class="user-details">
+                    <div class="input-box">
+                        <!-- <span class="details">Username</span> -->
+                        <input type="hidden" name="username" value="<?php echo $username; ?>" readonly>
+                    </div>
+                    
+                    <div class="input-box">
+                        <span class="details">Nama Task</span>
+                        <input type="text" name="task_name" placeholder="Nama Tugas broo" >
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Tanggal Deadline</span>
+                        <input type="date" name="date" placeholder="Deadline Tugas" class="datepicker" >
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Deskripsi Tugas</span>
+                        <textarea name="description" id="" cols="30" rows="10" placeholder="Deskripsi Tugas" ></textarea>
+                    </div>
+                </div>    
+                <div class="button">
+                    <input type="submit" value="Masukkin ke list bro">
+                </div>
+            </form>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
