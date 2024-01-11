@@ -317,6 +317,57 @@ a {
     font-size: 0.8em;
 }
 
+/* style-calendar.css */
+
+#calendar {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  /* Optional: Adjust the header and button styles */
+.calendar-container {
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 .5rem 1rem rgb(0, 0, 1);
+}
+
+.main-calendar {
+    margin: 5rem 0 3rem 0;
+}
+
+  .fc-header-toolbar {
+    background-color: var(--second-color); /* Header background color */
+    color: #fff; /* Header text color */
+    border-radius: 10px;
+    padding: 1rem;
+    font-family: 'roboto', sans-serif;
+  }
+  
+  .fc-button-primary {
+    background-color: #007bff; /* Button background color */
+    border-color: #007bff; /* Button border color */
+  }
+  
+  .fc-button-primary:hover {
+    background-color: #0056b3; /* Button background color on hover */
+    border-color: #0056b3; /* Button border color on hover */
+  }
+  
+  /* Optional: Adjust the event styles */
+  .fc-event {
+    background-color: #28a745; /* Event background color */
+    border-color: #218838; /* Event border color */
+    color: #fff; /* Event text color */
+  }
+  
+  .fc-event:hover {
+    background-color: #218838; /* Event background color on hover */
+    border-color: #1e7e34; /* Event border color on hover */
+  }
+  
+  /* Optional: Adjust other styles as needed */
+  
+
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;

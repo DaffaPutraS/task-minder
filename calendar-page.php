@@ -53,8 +53,9 @@ if(!isset($_SESSION['username'])){
         </nav>
     </div>
 
-    <div id='calendar'></div>
-
+    <div class="main-calendar">
+        <div id='calendar' class="calendar-container"></div>
+    </div>
 
     <script src="js/calendar.js"></script>
     <script src="js/index.js"></script>
