@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var profileMenu = document.getElementById('profile-menu');
+    var profileMenu = document.getElementById('card-menu');
     var profileOptions = document.querySelector('.profile-options');
 
     profileMenu.addEventListener('click', function (event) {

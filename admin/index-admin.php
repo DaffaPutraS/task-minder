@@ -2,6 +2,15 @@
 require('../proses/koneksi.php');
 session_start();
 
+
+
+//mengecek username pada session
+if(!isset($_SESSION['username'])){
+    $_SESSION['msg'] = 'anda harus login untuk mengakses halaman ini'; 
+    header('Location: login-page-admin.php');
+}
+
+
 // Check if the form is submitted for logging out
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
     // Perform any necessary logout actions, such as destroying the session
@@ -39,7 +48,7 @@ if (!$result) {
     <title>Data Users</title>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/style-login-admin.css">
+    <link rel="stylesheet" href="../css/style-index-admin.css">
 </head>
 <body>
 
