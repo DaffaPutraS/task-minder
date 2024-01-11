@@ -3,7 +3,6 @@ require('../proses/koneksi.php');
 session_start();
 
 $error = '';
-$validate = '';
 
 if (isset($_SESSION['username'])) {
     header('Location: index-admin.php');
@@ -20,25 +19,19 @@ if (isset($_POST['submit'])) {
     $captchaSession = $_SESSION['code'];
 
     if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
-        echo '<script>alert("Captcha salah"); window.location="index-admin.php"</script>';
+        echo '<script>alert("Captcha salah"); window.location="login-page-admin.php"</script>';
     } else {
         if (!empty(trim($username)) && !empty(trim($password))) {
-            // Update the table name and column names
             $query  = "SELECT * FROM admin WHERE username = '$username'";
             $result = mysqli_query($koneksi, $query);
             $rows   = mysqli_num_rows($result);
 
             if ($rows != 0) {
                 $adminData = mysqli_fetch_assoc($result);
-                $hash  = $adminData['password'];
-                if (password_verify($password, $hash)) {
-                    // Assigning admin information to the session
-                    $_SESSION['admin_id'] = $adminData['admin_id'];
-                    $_SESSION['name'] = $adminData['name'];
+                // Compare passwords without hashing
+                if ($password === $adminData['password']) {
                     $_SESSION['username'] = $username;
-                    $_SESSION['email'] = $adminData['email'];
-            
-                    header('Location: index-admin.php'); // Update the redirection here
+                    header('Location: index-admin.php');
                     exit();
                 } else {
                     // Password salah
@@ -46,7 +39,7 @@ if (isset($_POST['submit'])) {
                 }
             } else {
                 // Username salah
-                $error = 'Username tidak ditemukan';
+                $error = 'Username tidak ditemkan';
             }
         }
     }
@@ -67,7 +60,7 @@ if (isset($_POST['submit'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     <!-- Icon Title Link-->
-    <link rel="Icon" href="img/logo.png" type="image/x-icon">
+    <link rel="Icon" href="../img/logo.png" type="image/x-icon">
 
     <!-- Font Awesome CDN Link -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -88,7 +81,7 @@ if (isset($_POST['submit'])) {
                 <img src="../img/buku.png" alt="Books Image"/>
             </div>
             <div class="form">
-                <form action="index-admin.php" method="POST">
+                <form action="login-page-admin.php" method="POST">
                     <h2><b>Admin Only!</b></h2>
 
                     <div class="input-username">
@@ -106,9 +99,7 @@ if (isset($_POST['submit'])) {
                     
                     <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
                     
-                    <!-- <div class="href-register">
-                        <p>Belum punya account? <a href="register-page.php">Register</a></p>
-                    </div> -->
+                    
                 </form>
             </div>
         </section>

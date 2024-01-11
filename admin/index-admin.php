@@ -2,14 +2,11 @@
 require('../proses/koneksi.php');
 session_start();
 
-
-
 //mengecek username pada session
 if(!isset($_SESSION['username'])){
     $_SESSION['msg'] = 'anda harus login untuk mengakses halaman ini'; 
     header('Location: login-page-admin.php');
 }
-
 
 // Check if the form is submitted for logging out
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
@@ -18,6 +15,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
     // Optional: Redirect to a login page or another destination after logout
     header("Location: login-page-admin.php");
     exit();
+}
+
+// Check if the form is submitted for deleting a user
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_delete"])) {
+    $user_id_to_delete = $_POST["delete_user"];
+
+    // Perform the deletion query
+    $delete_query = "DELETE FROM users WHERE id_user = $user_id_to_delete";
+    $delete_result = mysqli_query($koneksi, $delete_query);
+
+    // Check if the query is successful
+    if ($delete_result) {
+        // Optional: Redirect to the same page after successful deletion
+        header("Location: index-admin.php");
+        exit();
+    } else {
+        // Handle the case where deletion fails
+        echo "Error deleting user: " . mysqli_error($koneksi);
+    }
 }
 
 // Pagination settings
@@ -37,7 +53,6 @@ $result = mysqli_query($koneksi, $query);
 if (!$result) {
     die("Query failed: " . mysqli_error($koneksi));
 }
-
 // Display the table
 ?>
 <!DOCTYPE html>
@@ -45,10 +60,12 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Users</title>
+    <title>Admin Dashboard</title>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style-index-admin.css">
+
+    <link rel="Icon" href="../img/logo.png" type="image/x-icon">
 </head>
 <body>
 
