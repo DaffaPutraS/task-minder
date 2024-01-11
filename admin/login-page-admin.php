@@ -64,6 +64,22 @@ if (isset($_POST['submit'])) {
 
     <!-- Font Awesome CDN Link -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+    .btn-backad {
+        float: right;
+        margin-top: 10px;
+        color: black;
+        text-decoration: none;
+        transition: color 0.3s; /* Menambahkan efek transisi untuk perubahan warna */
+    }
+
+    .btn-backad:hover {
+        color: green;
+    }
+</style>
+
+    
 </head>
 <body>
 
@@ -98,9 +114,10 @@ if (isset($_POST['submit'])) {
                     </div>
                     
                     <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
-                    
-                    
+                    <a href="../index.php" class="btn-backad">Kembali ke Beranda</a>
+
                 </form>
+
             </div>
         </section>
     </div>
