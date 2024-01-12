@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
     <title>Login</title>
 
     <!-- CSS only -->
-    <link rel="stylesheet" href="../css/style-login.css">
+    <link rel="stylesheet" href="../css/style-login-admin.css">
 
     <!--- Bootstrap Link-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -114,7 +114,9 @@ if (isset($_POST['submit'])) {
                     </div>
                     
                     <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
-                    <a href="../index.php" class="btn-backad">Kembali ke Beranda</a>
+                    <div class="href-register">
+                        <a href="../index.php">Kembali ke Beranda</a></p>
+                    </div>
 
                 </form>
 

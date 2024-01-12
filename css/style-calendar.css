@@ -13,7 +13,7 @@
     --body-font: 'Nunito', sans-serif;
     --normal-font-size: 1rem;
     --z-fixed: 100;
-    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
 }
 
 *,
@@ -35,6 +35,8 @@ a {
     text-decoration: none
 }
 
+
+/* HEADER */
 .header {
     width: 100%;
     height: var(--header-height);
@@ -68,7 +70,7 @@ a {
     cursor: pointer;
 }
 
-.header_btn_plus a{
+.header_btn_plus a {
     color: var(--second-color);
     font-size: 1.8rem;
 }
@@ -93,6 +95,13 @@ a {
     width: 40px
 }
 
+/* HEADER */
+
+
+
+
+
+/* NAVBAR */
 .l-navbar {
     position: fixed;
     top: 0;
@@ -183,38 +192,46 @@ a {
     background-color: var(--white-color);
 }
 
-.height-100 {
-    height: 100vh
-}
+/* NAVBAR */
 
-/* Add these styles to your existing CSS file or create a new one */
+
+
+
+/* PROFILE */
 .profile-options {
-  position: absolute;
-  top: 60px; /* Adjust this value as needed */
-  right: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  display: none;
-  flex-direction: column;
-  z-index: 1;
+    position: absolute;
+    top: 60px;
+    /* Adjust this value as needed */
+    right: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    z-index: 1;
 }
 
 .profile-option {
-  padding: 10px;
-  text-decoration: none;
-  color: #333;
-  display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    display: block;
 }
 
 .profile-option:hover {
-  background-color: #f5f5f5;
+    background-color: #f5f5f5;
 }
 
 .profile-options.active {
-  display: flex;
+    display: flex;
 }
+/* PROFILE */
 
+
+
+
+
+/* MAIN PAGE */
 .main-page {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -224,107 +241,11 @@ a {
     padding-top: 1.5rem;
 }
 
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}   
-
-.card {
-    --primary-clr: #1C204B;
-    --dot-clr: #BBC0FF;
-    --play: hsl(195, 74%, 62%);
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-
-}
-
-.card {
-    font-family: "Arial";
-    color: #fff;
-    border: none;
-    display: grid;
-    cursor: pointer;
-    grid-template-rows: 50px 1fr;
-}
-
-.card:hover .img-section {
-    transform: translateY(1em);
-}
-
-.card-desc {
-    border-radius: 10px;
-    padding: 15px;
-    position: relative;
-    top: -10px;
-    display: grid;
-    gap: 10px;
-    background: var(--third-color);
-}
-
-.card-time {
-    font-size: 1.7em;
-    font-weight: 500;
-}
-
-.img-section {
-    transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background: var(--second-color);
-}
-
-.img-section img {
-    width: 51px;
-    height: 50px;
-    margin: 8px 8px 0 0;
-}
-
-.card-header {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.card-title {
-    flex: 1;
-    font-size: 0.9em;
-    font-weight: 500;
-}
-
-.card-menu {
-    display: flex;
-    gap: 4px;
-    margin-inline: auto;
-}
-
-.card img {
-    float: right;
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.card .dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--dot-clr);
-}
-
-.card .recent {
-    line-height: 0;
-    font-size: 0.8em;
-}
-
-/* style-calendar.css */
-
 #calendar {
     max-width: 1000px;
     margin: 0 auto;
-  }
-  
-  /* Optional: Adjust the header and button styles */
+}
+
 .calendar-container {
     padding: 2rem;
     border-radius: 30px;
@@ -335,38 +256,50 @@ a {
     margin: 5rem 0 3rem 0;
 }
 
-  .fc-header-toolbar {
-    background-color: var(--second-color); /* Header background color */
-    color: #fff; /* Header text color */
+.fc-header-toolbar {
+    background-color: var(--second-color);
+    /* Header background color */
+    color: #fff;
+    /* Header text color */
     border-radius: 10px;
     padding: 1rem;
     font-family: 'roboto', sans-serif;
-  }
-  
-  .fc-button-primary {
-    background-color: #007bff; /* Button background color */
-    border-color: #007bff; /* Button border color */
-  }
-  
-  .fc-button-primary:hover {
-    background-color: #0056b3; /* Button background color on hover */
-    border-color: #0056b3; /* Button border color on hover */
-  }
-  
-  /* Optional: Adjust the event styles */
-  .fc-event {
-    background-color: #28a745; /* Event background color */
-    border-color: #218838; /* Event border color */
-    color: #fff; /* Event text color */
-  }
-  
-  .fc-event:hover {
-    background-color: #218838; /* Event background color on hover */
-    border-color: #1e7e34; /* Event border color on hover */
-  }
-  
-  /* Optional: Adjust other styles as needed */
-  
+}
+
+.fc-button-primary {
+    background-color: #007bff;
+    /* Button background color */
+    border-color: #007bff;
+    /* Button border color */
+}
+
+.fc-button-primary:hover {
+    background-color: #0056b3;
+    /* Button background color on hover */
+    border-color: #0056b3;
+    /* Button border color on hover */
+}
+
+/* Optional: Adjust the event styles */
+.fc-event {
+    background-color: #28a745;
+    /* Event background color */
+    border-color: #218838;
+    /* Event border color */
+    color: #fff;
+    /* Event text color */
+}
+
+.fc-event:hover {
+    background-color: #218838;
+    /* Event background color on hover */
+    border-color: #1e7e34;
+    /* Event border color on hover */
+}
+/* MAIN PAGE */
+
+
+
 
 @media screen and (min-width: 768px) {
     body {

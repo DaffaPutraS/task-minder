@@ -72,10 +72,9 @@ if (isset($_POST['submit'])) {
         if ($error) {
             echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 300px; position: fixed; top: 20px; right: 20px;">
                     <strong>Error!</strong> ' . $error . '
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>';
         }
-        ?>    
+    ?>    
         <section class="login-container">
             <div class="book-img">
                 <img src="img/buku.png" alt="Books Image"/>

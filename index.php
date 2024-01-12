@@ -28,7 +28,7 @@
 		<nav class="navbar">
 			<a href="#home">Home</a>
 			<a href="#about">About</a>
-			<a href="#menu">Features</a>
+			<a href="#features">Features</a>
 			<a href="login-page.php"><span>Login</span></a>
 		</nav>
 
@@ -73,8 +73,8 @@
 <!-- ABOUT ENDS -->
 
 
-<!-- MENU STARTS -->
-	<section class="menu" id="menu">
+<!-- FEATURES STARTS -->
+	<section class="features" id="features">
 		<div class="heading">
 			<h3>Our Features</h3>	
 			<div class="box-container">
@@ -97,7 +97,7 @@
 		</div>
 	</section>
 
-<!-- MENU ENDS -->
+<!-- FEATURES ENDS -->
 
 <!-- ABOUT2 STARTS -->
 <section class="about2" id="about2">

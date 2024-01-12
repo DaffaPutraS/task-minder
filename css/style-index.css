@@ -67,6 +67,9 @@ section {
   font-family: "Merienda One", cursive;
 }
 
+
+
+/* BUTTON */
 .btn {
   display: inline-block;
   margin-top: 1rem;
@@ -82,7 +85,13 @@ section {
   background-color: var(--third-color);
   transition: .3s;
 }
+/* BUTTON */
 
+
+
+
+
+/* HEADER */
 .header {
   position: -webkit-sticky;
   position: sticky;
@@ -134,7 +143,13 @@ section {
   color: var(--black);
   cursor: pointer;
 }
+/* HEADER */
 
+
+
+
+
+/* HOME */
 .home-bg {
   background: url(../img/background-home-page-2.png) no-repeat;
   background-size: cover;
@@ -171,7 +186,13 @@ section {
   font-family: 'poppins', sans-serif;
   font-size: 1.6rem;
 }
+/* HOME */
 
+
+
+
+
+/* ABOUT */
 .about {
   margin-top: 6rem;
   display: flex;
@@ -217,12 +238,18 @@ section {
   font-family: 'poppins', sans-serif;
   font-size: 1.6rem;
 }
+/* ABOUT */
 
-.menu {
+
+
+
+
+/* FEATURES */
+.features {
   margin-top: 7rem;
 }
 
-.menu .box-container {
+.features .box-container {
   padding-top: 5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, 30rem);
@@ -231,59 +258,65 @@ section {
   justify-content: center;
 }
 
-.menu .box-container .box {
+.features .box-container .box {
   text-align: center;
   margin: 5%;
   cursor: pointer;
 }
 
-/* .menu .box-container .box:hover {
+/* .features .box-container .box:hover {
   background-color: var(--main-color);
   transition: 0.3s ease;
 }
 
-.menu .box-container .box:active {
+.features .box-container .box:active {
   background-color: var(--black);
 }
-.menu .box-container .box:active h3 {
+.features .box-container .box:active h3 {
   color: var(--white);
 }
-.menu .box-container .box:active p {
+.features .box-container .box:active p {
   color: var(--white);
 } */
 
-.menu .box-container .box img {
+.features .box-container .box img {
   width: 190px;
   height: 150px;
   margin-bottom: 2rem;
 }
 
-.menu .box-container .box h3 {
+.features .box-container .box h3 {
   font-size: 2rem;
   color: var(--black);
 }
 
-.menu .box-container .box p {
+.features .box-container .box p {
   font-size: 15px;
   padding-top: 4%;
   font-size: 1.25rem;
   font-family: 'poppins', sans-serif;
 }
 
-.menu .tekstambah {
+.features .tekstambah {
   text-align: center;
   margin: 3%;
 }
 
-.menu .tekstambah h3 {
+.features .tekstambah h3 {
   font-size: 3rem;
 }
 
-.menu .tekstambah p {
+.features .tekstambah p {
   font-size: 1.7rem;
   padding: 1%;
 }
+/* FEATURES */
 
+
+
+
+
+/* ABOUT2 */
 .about2 {
   margin-top: 6rem;
   display: flex;
@@ -329,42 +362,13 @@ section {
   font-family: 'poppins', sans-serif;
   font-size: 1.6rem;
 }
+/* ABOUT2 */
 
-.footer .box-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
-  gap: 1.5rem;
-  align-items: flex-start;
-}
 
-.footer .box-container .box {
-  text-align: center;
-}
 
-.footer .box-container .box i {
-  font-size: 2.5rem;
-  line-height: 6rem;
-  height: 6rem;
-  width: 6rem;
-  border-radius: 50%;
-  background-color: var(--main-color);
-  color: var(--white);
-  margin-bottom: 0.5rem;
-}
 
-.footer .box-container .box h3 {
-  margin: 1rem 0;
-  font-size: 2rem;
-  color: var(--black);
-}
 
-.footer .box-container .box p {
-  line-height: 2rem;
-  font-size: 1.6rem;
-  color: var(--light-color);
-  margin: 1rem 0;
-}
-
+/* FOOTER */
 .footer .credit {
   text-align: center;
   margin-top: 3rem;
@@ -386,6 +390,12 @@ section {
   text-decoration: none;
   color: var(--third-color);
 }
+/* FOOTER */
+
+
+
+
+
 
 @-webkit-keyframes animate {
   0% {
@@ -407,6 +417,9 @@ section {
     width: 100%;
   }
 }
+
+
+
 @media (max-width: 768px) {
   #menu-btn {
     display: inline-block;
@@ -452,6 +465,29 @@ section {
     font-size: 4rem;
   }
 
+  /* .about {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about .image,
+  .about .content {
+    width: 100%;
+    text-align: center; 
+  }
+
+  .about .image {
+    order: 1;
+    margin-bottom: 1rem;
+  }
+
+  .about .content {
+    order: 2;
+    margin-top: 1rem; 
+  } */
+
+
   .about .content h3 {
     font-size: 3rem;
     text-align: center;
@@ -461,7 +497,16 @@ section {
     text-align: center;
   }
 
-  .menu .heading h3 {
+  .about2 .content h3 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .about2 .content p {
+    text-align: center;
+  }
+
+  .features .heading h3 {
     font-size: 3rem;
     text-align: center;
   }
@@ -505,6 +550,9 @@ section {
     margin: 3%;
   }
 }
+
+
+
 @media (max-width: 450px) {
   html {
     font-size: 50%;

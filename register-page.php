@@ -1,3 +1,67 @@
+<?php
+// Menggunakan koneksi.php untuk menyambungkan ke database
+require('proses/koneksi.php');
+
+// Memulai sesi
+session_start();
+
+$error = '';
+$validate = '';
+
+// Redirect ke login-page jika sudah login
+if (isset($_SESSION['username'])) {
+    header("Location: login-page.php");
+}
+
+// Menangani submit form
+if (isset($_POST['submit'])) {
+    $username = stripslashes($_POST['username']);
+    $username = mysqli_real_escape_string($koneksi, $username);
+    $name = stripslashes($_POST['name']);
+    $name = mysqli_real_escape_string($koneksi, $name);
+    $email = stripslashes($_POST['email']);
+    $email = mysqli_real_escape_string($koneksi, $email);
+    $password = stripslashes($_POST['password']);
+    $password = mysqli_real_escape_string($koneksi, $password);
+    $repass = stripslashes($_POST['repassword']);
+    $repass = mysqli_real_escape_string($koneksi, $repass);
+
+    
+
+    // Memastikan tidak ada data yang kosong
+    if (!empty(trim($name)) && !empty(trim($username)) && !empty(trim($email)) && !empty(trim($password)) && !empty(trim($repass))) {
+        // Memastikan password dan repassword sama
+        if ($password == $repass) {
+            // Memeriksa apakah username sudah terdaftar
+            if (cek_nama($name, $koneksi) == 0) {
+                $pass = password_hash($password, PASSWORD_DEFAULT);
+                $query = "INSERT INTO users (username, name, email, password) VALUES ('$username', '$name', '$email', '$pass')";
+                $result = mysqli_query($koneksi, $query);
+
+                if ($result) {
+                    // Mengarahkan ke login-page setelah registrasi berhasil
+                    header('Location: login-page.php');
+                } else {
+                    $error = 'Username sudah terdaftar';
+                }
+            } else {
+                $validate = 'Password tidak sama !!';
+            }
+        }
+    }
+}
+
+// Fungsi untuk memeriksa apakah username sudah terdaftar
+function cek_nama($username, $koneksi)
+{
+    $nama = mysqli_real_escape_string($koneksi, $username);
+    $query = "SELECT * FROM users WHERE username = '$nama'";
+    if ($result = mysqli_query($koneksi, $query)) return mysqli_num_rows($result);
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,9 +84,24 @@
 <body>
     <!-- Navbar Section -->
     <div class="background"> 
-        <section class="register-container">
+    
+    <section class="register-container">
             <div class="form">
-                <form action="proses/register.php" method="POST">
+                <!-- Menampilkan pesan kesalahan jika terdapat error -->
+                <?php if (!empty($error)) : ?>
+                    <div class="alert alert-danger" role="alert" style="width: 500px; position: fixed; top: 20px; left: 20px;">
+                        <?php echo $error; ?>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Menampilkan pesan validasi -->
+                <?php if (!empty($validate)) : ?>
+                    <div class="alert alert-warning" role="alert" style="width: 500px; position: fixed; top: 20px; left: 20px;">
+                        <?php echo $validate; ?>
+                    </div>
+                <?php endif; ?>
+
+                <form action="register-page.php" method="POST">
                     <h2><b>Sign Up</b></h2>
                     <div class="input-name">
                         <input type="text" placeholder="Name" id="name" name="name" required>
@@ -40,7 +119,7 @@
                         <input type="password" placeholder="Re-Password" id="InputRePassword" name="repassword" required>
                     </div>
                     
-                    <button class="bn632-hover bn18" type="submit" name="submit" >Register</button>
+                    <button class="bn632-hover bn18" type="submit" name="submit">Register</button>
                     
                     <div class="href-register">
                         <p>Sudah punya account? <a href="login-page.php">Login</a></p>
@@ -53,6 +132,7 @@
         </section>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6pZl3/JfxI65qD5V/s2IeVFYfH9SmoQ5" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+
 </body>
 </html>

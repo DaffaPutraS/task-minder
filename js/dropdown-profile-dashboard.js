@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add logic for profile-link and logout-click events if needed
     var profileLink = document.getElementById('profile-link');
     profileLink.addEventListener('click', function () {
-        alert('Profile clicked!');
+        alert('Selamat Datang');
     });
 });
 
