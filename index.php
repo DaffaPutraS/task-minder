@@ -108,7 +108,7 @@
 		<h3>Gabung dan Selamatkan Tugas anda</h3>
 		<p>Yuk, jadi bagian dari TaskMinder, tempat keasyikan para pahlawan tugas! Bergabunglah di panggung seru ini dan daftarkan dirimu sekarang. Rasakan keseruan mengelola tugas tanpa dramatisasi berlebihan. Di TaskMinder, setiap tugas menjadi petualangan yang seru dan bermakna. Ayo, jangan lewatkan! Daftar sekarang untuk pengalaman manajemen tugas yang nggak hanya asik tapi juga super produktif! Mari bersama-sama menciptakan kisah produktivitas yang luar biasa!</p>
 		<div class="btn-daftar">
-			<a href="register-page.php" class="btn">Daftar</a>
+			<a href="register-page.php" class="bn632-hover bn18">Daftar</a>
 		</div>
 	</div>
 </section>

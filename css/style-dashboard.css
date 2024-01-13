@@ -222,6 +222,7 @@ a {
 
 .profile-option:hover {
     background-color: #f5f5f5;
+    border-radius: 5px;
 }
 
 .profile-options.active {

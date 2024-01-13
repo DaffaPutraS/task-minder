@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Merienda+One&family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
+
 :root {
   --main-color: #57C5B6;
   --second-color: #159895;
@@ -7,8 +8,8 @@
   --black: #333;
   --white: #fff;
   --light-color: #666;
-  --border:.2rem solid var(--black);
-  --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+  --border: .2rem solid var(--black);
+  --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
 }
 
 * {
@@ -90,6 +91,98 @@ section {
 
 
 
+/* BUTTON2 */
+.bn632-hover {
+  width: auto;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: auto;
+  padding: 12px 35px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 8px;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.bn632-hover:hover {
+  background-position: 100% 0;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.bn632-hover:focus {
+  outline: none;
+}
+
+.bn632-hover.bn18 {
+  background-image: linear-gradient(to right,
+      #159895,
+      #30dd8a,
+      #40e495,
+      #2386ad);
+  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+/* BUTTON2 */
+
+
+
+
+/* BUTTON3 */
+.bn53 {
+  background-color: #b81515;
+  padding: 7px;
+  width: 100px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  animation: bn53bounce 4s infinite;
+  cursor: pointer;
+}
+
+@keyframes bn53bounce {
+  5%,
+  50% {
+    transform: scale(1);
+  }
+
+  10% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1);
+  }
+
+  20% {
+    transform: scale(1) rotate(-5deg);
+  }
+
+  25% {
+    transform: scale(1) rotate(5deg);
+  }
+
+  30% {
+    transform: scale(1) rotate(-3deg);
+  }
+
+  35% {
+    transform: scale(1) rotate(2deg);
+  }
+
+  40% {
+    transform: scale(1) rotate(0);
+  }
+}
+/* BUTTON3 */
+
+
+
+
 
 /* HEADER */
 .header {
@@ -143,6 +236,7 @@ section {
   color: var(--black);
   cursor: pointer;
 }
+
 /* HEADER */
 
 
@@ -186,6 +280,7 @@ section {
   font-family: 'poppins', sans-serif;
   font-size: 1.6rem;
 }
+
 /* HOME */
 
 
@@ -238,6 +333,7 @@ section {
   font-family: 'poppins', sans-serif;
   font-size: 1.6rem;
 }
+
 /* ABOUT */
 
 
@@ -310,6 +406,7 @@ section {
   font-size: 1.7rem;
   padding: 1%;
 }
+
 /* FEATURES */
 
 
@@ -362,6 +459,7 @@ section {
   font-family: 'poppins', sans-serif;
   font-size: 1.6rem;
 }
+
 /* ABOUT2 */
 
 
@@ -390,6 +488,7 @@ section {
   text-decoration: none;
   color: var(--third-color);
 }
+
 /* FOOTER */
 
 
@@ -408,6 +507,7 @@ section {
     transform: scaleY(0);
   }
 }
+
 @media (max-width: 991px) {
   html {
     font-size: 55%;
@@ -439,13 +539,13 @@ section {
     border-top: var(--border);
     border-bottom: var(--border);
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     transition: 0.2s linear;
   }
 
   .header .flex .navbar.active {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 
   .header .flex .navbar a {
@@ -453,9 +553,9 @@ section {
     margin: 2rem;
   }
 
-  /* .home-bg {
+  .home-bg {
     background-position: left;
-  } */
+  }
 
   .home-bg .home {
     justify-content: center;
@@ -463,6 +563,13 @@ section {
 
   .home-bg .home .content h3 {
     font-size: 4rem;
+  }
+
+  .home-bg .home .content {
+    background-color: var(--white);
+    padding: 30px;
+    box-shadow: 0px 0px 50px 0px rgba(84, 84, 84, 0.417);
+    border-radius: 20px;
   }
 
   /* .about {
@@ -557,4 +664,6 @@ section {
   html {
     font-size: 50%;
   }
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
