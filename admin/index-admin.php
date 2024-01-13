@@ -154,9 +154,9 @@ if (!$result) {
                     echo "<td>{$row['username']}</td>";
                     echo "<td>{$row['email']}</td>";
                     echo '<td>
-                            <form method="POST" action="">
+                            <form method="POST" action="" class="delete-form">
                                 <input type="hidden" name="delete_user" value="' . $row['id_user'] . '">
-                                <button type="submit" name="submit_delete" class="delete-btn">Delete</button>
+                                <button type="button" class="delete-btn" onclick="confirmDelete(' . $row['id_user'] . ')">Delete</button>
                             </form>
                             </td>';
                     echo '</tr>';
@@ -197,8 +197,10 @@ if (!$result) {
 
 
 
+    <script src="../js/alert-delete.js"></script>
     <script src="../js/dashboard.js"></script>
     <script src="../js/dropdown-profile-dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

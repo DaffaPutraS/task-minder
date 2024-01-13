@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
                 }
             } else {
                 // Username salah
-                $error = 'Username tidak ditemkan';
+                $error = 'Username tidak ditemukan';
             }
         }
     }
@@ -65,19 +65,6 @@ if (isset($_POST['submit'])) {
     <!-- Font Awesome CDN Link -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <style>
-    .btn-backad {
-        float: right;
-        margin-top: 10px;
-        color: black;
-        text-decoration: none;
-        transition: color 0.3s; /* Menambahkan efek transisi untuk perubahan warna */
-    }
-
-    .btn-backad:hover {
-        color: green;
-    }
-</style>
 
     
 </head>
@@ -88,7 +75,6 @@ if (isset($_POST['submit'])) {
         if ($error) {
             echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 300px; position: fixed; top: 20px; right: 20px;">
                     <strong>Error!</strong> ' . $error . '
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>';
         }
         ?>    
