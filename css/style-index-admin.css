@@ -116,6 +116,7 @@ a {
     transition: .5s;
     z-index: var(--z-fixed);
     box-shadow: 0px 0px 20px 4px rgba(27, 27, 27, 0.279);
+    text-decoration: none;
 }
 
 .nav {
@@ -131,7 +132,8 @@ a {
     grid-template-columns: max-content max-content;
     align-items: center;
     column-gap: 1rem;
-    padding: .5rem 0 .5rem 1.5rem
+    padding: .5rem 0 .5rem 1.5rem;
+    text-decoration: none;
 }
 
 .nav_logo {
@@ -141,6 +143,7 @@ a {
     align-items: center;
     column-gap: 1rem;
     padding: .5rem 0 .5rem 0.9rem;
+    text-decoration: none;
 }
 
 .nav_logo img {
@@ -236,9 +239,12 @@ a {
 
 
 /* MAIN PAGE */
+.main-page {
+    margin-top: 7rem;
+}
+
 .container {
     width: auto;
-    margin: 7rem auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 20px;
@@ -250,7 +256,6 @@ h2 {
     font-family: 'roboto', sans-serif;
     text-align: center;
     font-weight: bold;
-    margin: .5rem 0 2rem;
 }
 
 
@@ -259,7 +264,6 @@ h2 {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    border-radius: 20px;
     border: .1px solid #ddddddd0;
 }
 
@@ -288,6 +292,7 @@ h2 {
     border-bottom-left-radius: 10px;
     font-family: 'poppins', sans-serif;
     transition: box-shadow 0.2s ease;
+    
 }
 
 .search-input:focus {
@@ -336,6 +341,15 @@ h2 {
 .pagination a:hover {
     background-color: var(--third-color);
     color: #fff;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--third-color); /* Warna latar aktif */
+    border-color: var(--third-color); /* Warna border aktif */
+}
+
+.pagination .page-link {
+    color: var(--third-color); /* Warna teks tautan halaman */
 }
 
 /* Logout Button Styles */

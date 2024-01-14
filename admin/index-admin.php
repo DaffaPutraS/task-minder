@@ -80,6 +80,9 @@ if (!$result) {
     <link rel="stylesheet" href="../css/style-index-admin.css">
 
     <link rel="Icon" href="../img/logo.png" type="image/x-icon">
+
+    <!-- Bootstrap Link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body id="body-pd">
@@ -124,70 +127,134 @@ if (!$result) {
 
     <!-- MAIN PAGE STARTS -->
 
+    <div class="main-page">
+    <!-- Container untuk form pencarian -->
     <div class="container">
         <h2>Data Users</h2>
-
-        <!-- Search Bar -->
-        <form class="search-bar" method="GET" action="">
-            <input type="text" class="search-input" name="search" placeholder="Search by Username" value="<?php echo $search_query; ?>">
-            <button type="submit" class="search-btn">Search</button>
+        <!-- Form pencarian data berdasarkan ID Pembeli atau Nama -->
+        <form action="" method="post">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search by ID User atau Nama" name="searchTerm">
+                <button class="search-btn" type="submit">Search</button>
+            </div>
         </form>
 
-        <!-- Table for Displaying Data Users -->
-        <table class="custom-table">
+        <!-- Tabel untuk menampilkan data -->
+        <table class="custom-table" style="box-shadow: 0px 0px 0.8px 0px #000000;">
             <thead>
+                <!-- Header kolom-kolom pada tabel -->
                 <tr>
                     <th>ID User</th>
                     <th>Name</th>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Action</th> <!-- New column for delete button -->
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+                <!-- Menampilkan data dari database -->
                 <?php
-                // Loop to display data from the query result
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<tr>';
-                    echo "<td>{$row['id_user']}</td>";
-                    echo "<td>{$row['name']}</td>";
-                    echo "<td>{$row['username']}</td>";
-                    echo "<td>{$row['email']}</td>";
-                    echo '<td>
-                            <form method="POST" action="" class="delete-form">
-                                <input type="hidden" name="delete_user" value="' . $row['id_user'] . '">
-                                <button type="button" class="delete-btn" onclick="confirmDelete(' . $row['id_user'] . ')">Delete</button>
-                            </form>
-                            </td>';
-                    echo '</tr>';
+                // Include file koneksi database
+                include "../proses/koneksi.php";
+
+                // Konfigurasi Pagination
+                $limit = 5;
+                $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $start = ($page - 1) * $limit;
+
+                // Query untuk mengambil data dengan pagination dan kata kunci pencarian
+                $searchTerm = isset($_POST['searchTerm']) ? $_POST['searchTerm'] : '';
+                $whereClause = '';
+
+                if (!empty($searchTerm)) {
+                    $whereClause = "WHERE id_user LIKE '%$searchTerm%' OR name LIKE '%$searchTerm%'";
                 }
 
-                // Free the query result
-                mysqli_free_result($result);
+                $query = "SELECT id_user, name, username, email FROM users
+                        $whereClause
+                        LIMIT $start, $limit";
+                $result = $koneksi->query($query);
 
-                // Pagination Query (move this before closing the connection)
-                $pagination_query = "SELECT COUNT(*) FROM users $search_condition";
-                $pagination_result = mysqli_query($koneksi, $pagination_query);
-                $total_records = mysqli_fetch_array($pagination_result)[0];
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Menampilkan baris data dalam tabel
+                        echo "<tr class='text-center'>";
+                        echo "<td>" . $row["id_user"] . "</td>";
+                        echo "<td>" . $row["name"] . "</td>";
+                        echo "<td>" . $row["username"] . "</td>";
+                        echo "<td>" . $row["email"] . "</td>";
+                        echo '<td>
+                                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal' . $row["id_user"] . '">Delete</a>
+                            </td>';
+                        echo "</tr>";
 
-                // Display pagination links
+                        // Modal untuk delete
+                        echo '<div class="modal fade" id="deleteModal' . $row["id_user"] . '" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Delete</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin ingin menghapus data ini?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="proses-delete.php?id_user=' . $row["id_user"] . '" class="btn btn-danger">Delete</a>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+                        
+                    }
+                } else {
+                    // Menampilkan pesan jika data tidak ditemukan
+                    echo "<tr><td colspan='7'>Data not found.</td></tr>";
+                }
+
+                $koneksi->close();
                 ?>
             </tbody>
         </table>
 
-        <!-- Pagination Links -->
-        <ul class="pagination">
-            <?php
-            for ($i = 1; $i <= ceil($total_records / $records_per_page); $i++) {
-                echo '<li class="page-item ' . ($i == $page ? 'active' : '') . '"><a href="?page=' . $i . '&search=' . $search_query . '">' . $i . '</a></li>';
-            }
-            ?>
-        </ul>
+        <!-- Pagination -->
+        <?php
+        // Include file koneksi database
+        include "../proses/koneksi.php";
 
-        <!-- Button to Logout -->
-        <!-- <form method="POST" action="">
-            <button type="submit" name="logout" class="logout-btn">Logout</button>
-        </form> -->
+        // Query untuk mendapatkan total data
+        $queryTotal = "SELECT COUNT(id_user) as total FROM users";
+        $resultTotal = $koneksi->query($queryTotal);
+        $dataTotal = $resultTotal->fetch_assoc();
+        $totalPages = ceil($dataTotal['total'] / $limit);
+
+        // Menentukan halaman saat ini
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+        // Menampilkan tombol "Previous" jika halaman saat ini lebih dari 1
+        echo '<ul class="pagination justify-content-center">';
+        if ($current_page > 1) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page - 1) . '">Previous</a></li>';
+        }
+
+        // Menampilkan nomor-nomor halaman
+        for ($i = 1; $i <= $totalPages; $i++) {
+            echo '<li class="page-item ' . ($current_page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+
+        // Menampilkan tombol "Next" jika halaman saat ini kurang dari total halaman
+        if ($current_page < $totalPages) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page + 1) . '">Next</a></li>';
+        }
+
+        echo '</ul>';
+
+        $koneksi->close();
+        ?>
+    </div>
     </div>
 
     <!-- MAIN PAGE ENDS -->
@@ -197,10 +264,13 @@ if (!$result) {
 
 
 
+    
+
     <script src="../js/alert-delete.js"></script>
     <script src="../js/dashboard.js"></script>
     <script src="../js/dropdown-profile-dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
