@@ -123,7 +123,7 @@ if (!isset($_SESSION['username'])) {
                             </div>
                         </div>
                         <div class="card-time"><?php echo $row['date']; ?></div>
-                        <p class="recent"><?php echo $row['description']; ?></p>
+                        <p class="recent" id="description"><?php echo $row['description']; ?></p>
                     </div>
                 </div>
             </div>
@@ -158,5 +158,30 @@ if (!isset($_SESSION['username'])) {
             }
         }
     </script>
+
+    <script>
+        // Function untuk memotong dan menambahkan titik-titik
+        function truncateText(text, maxLength) {
+            return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+        }
+
+        // Memanggil function saat dokumen dimuat
+        document.addEventListener('DOMContentLoaded', function () {
+            var descriptions = document.querySelectorAll('.recent');
+
+            descriptions.forEach(function (description) {
+                var originalText = description.textContent;
+                var truncatedText = truncateText(originalText, 42);
+
+                description.textContent = truncatedText;
+
+                // Optional: Tambahkan tooltip dengan teks lengkap
+                if (originalText !== truncatedText) {
+                    description.setAttribute('title', originalText);
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

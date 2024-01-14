@@ -55,7 +55,7 @@
 
                     <div class="input-box">
                         <span class="details">Deskripsi Tugas</span>
-                        <textarea name="description" id="" cols="30" rows="10" placeholder="Deskripsi Tugas" ></textarea>
+                        <textarea name="description" id="" cols="30" rows="10" placeholder="Deskripsi Tugas"></textarea>
                     </div>
                 </div>    
                 <div class="button">

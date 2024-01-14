@@ -5,59 +5,9 @@ require('proses/koneksi.php');
 // Memulai sesi
 session_start();
 
-$error = '';
-$validate = '';
 
-// Redirect ke login-page jika sudah login
-if (isset($_SESSION['username'])) {
-    header("Location: login-page.php");
-}
 
-// Menangani submit form
-if (isset($_POST['submit'])) {
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($koneksi, $username);
-    $name = stripslashes($_POST['name']);
-    $name = mysqli_real_escape_string($koneksi, $name);
-    $email = stripslashes($_POST['email']);
-    $email = mysqli_real_escape_string($koneksi, $email);
-    $password = stripslashes($_POST['password']);
-    $password = mysqli_real_escape_string($koneksi, $password);
-    $repass = stripslashes($_POST['repassword']);
-    $repass = mysqli_real_escape_string($koneksi, $repass);
 
-    
-
-    // Memastikan tidak ada data yang kosong
-    if (!empty(trim($name)) && !empty(trim($username)) && !empty(trim($email)) && !empty(trim($password)) && !empty(trim($repass))) {
-        // Memastikan password dan repassword sama
-        if ($password == $repass) {
-            // Memeriksa apakah username sudah terdaftar
-            if (cek_nama($name, $koneksi) == 0) {
-                $pass = password_hash($password, PASSWORD_DEFAULT);
-                $query = "INSERT INTO users (username, name, email, password) VALUES ('$username', '$name', '$email', '$pass')";
-                $result = mysqli_query($koneksi, $query);
-
-                if ($result) {
-                    // Mengarahkan ke login-page setelah registrasi berhasil
-                    header('Location: login-page.php');
-                } else {
-                    $error = 'Username sudah terdaftar';
-                }
-            } else {
-                $validate = 'Password tidak sama !!';
-            }
-        }
-    }
-}
-
-// Fungsi untuk memeriksa apakah username sudah terdaftar
-function cek_nama($username, $koneksi)
-{
-    $nama = mysqli_real_escape_string($koneksi, $username);
-    $query = "SELECT * FROM users WHERE username = '$nama'";
-    if ($result = mysqli_query($koneksi, $query)) return mysqli_num_rows($result);
-}
 ?>
 
 
@@ -80,13 +30,85 @@ function cek_nama($username, $koneksi)
 
     <!-- Font Awesome CDN Link -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
     <!-- Navbar Section -->
     <div class="background"> 
+    <?php
+                $error = '';
+                $validate = '';
+                
+                // Redirect ke login-page jika sudah login
+                if (isset($_SESSION['username'])) {
+                    header("Location: login-page.php");
+                }
+
+                // Menangani submit form
+                if (isset($_POST['submit'])) {
+                    $username = stripslashes($_POST['username']);
+                    $username = mysqli_real_escape_string($koneksi, $username);
+                    $name = stripslashes($_POST['name']);
+                    $name = mysqli_real_escape_string($koneksi, $name);
+                    $email = stripslashes($_POST['email']);
+                    $email = mysqli_real_escape_string($koneksi, $email);
+                    $password = stripslashes($_POST['password']);
+                    $password = mysqli_real_escape_string($koneksi, $password);
+                    $repass = stripslashes($_POST['repassword']);
+                    $repass = mysqli_real_escape_string($koneksi, $repass);
+
+                    
+
+                    // Memastikan tidak ada data yang kosong
+                    if (!empty(trim($name)) && !empty(trim($username)) && !empty(trim($email)) && !empty(trim($password)) && !empty(trim($repass))) {
+                        // Memastikan password dan repassword sama
+                        if ($password == $repass) {
+                            // Memeriksa apakah username sudah terdaftar
+                            if (cek_nama($name, $koneksi) == 0) {
+                                $pass = password_hash($password, PASSWORD_DEFAULT);
+                                $query = "INSERT INTO users (username, name, email, password) VALUES ('$username', '$name', '$email', '$pass')";
+                                $result = mysqli_query($koneksi, $query);
+
+                                if ($result) {
+                                    // Mengarahkan ke login-page setelah registrasi berhasil
+                                    echo '<script>
+                                            Swal.fire({
+                                            icon: "success",
+                                            title: "Register berhasil!",
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                            }).then(() => {
+                                            window.location="login-page.php";
+                                            });
+                                    </script>';
+                                    exit();
+                                } else {
+                                    $error = 'Username sudah terdaftar';
+                                }
+                            } else {
+                                $validate = 'Password tidak sama !!';
+                            }
+                        }
+                    }
+                }
+
+                // Fungsi untuk memeriksa apakah username sudah terdaftar
+                function cek_nama($username, $koneksi)
+                {
+                    $nama = mysqli_real_escape_string($koneksi, $username);
+                    $query = "SELECT * FROM users WHERE username = '$nama'";
+                    if ($result = mysqli_query($koneksi, $query)) return mysqli_num_rows($result);
+                }
+                ?>
     
     <section class="register-container">
             <div class="form">
+
                 <!-- Menampilkan pesan kesalahan jika terdapat error -->
                 <?php if (!empty($error)) : ?>
                     <div class="alert alert-danger" role="alert" style="width: 500px; position: fixed; top: 20px; left: 20px;">
@@ -100,6 +122,9 @@ function cek_nama($username, $koneksi)
                         <?php echo $validate; ?>
                     </div>
                 <?php endif; ?>
+
+
+                
 
                 <form action="register-page.php" method="POST">
                     <h2><b>Sign Up</b></h2>

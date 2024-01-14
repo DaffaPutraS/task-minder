@@ -8,43 +8,8 @@ if (isset($_SESSION['username'])) {
     header('Location: index-admin.php');
     exit();
 }
-
-if (isset($_POST['submit'])) {
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($koneksi, $username);
-    $password = stripslashes($_POST['password']);
-    $password = mysqli_real_escape_string($koneksi, $password);
-
-    $userCaptcha = $_POST['kodecaptcha'];
-    $captchaSession = $_SESSION['code'];
-
-    if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
-        echo '<script>alert("Captcha salah"); window.location="login-page-admin.php"</script>';
-    } else {
-        if (!empty(trim($username)) && !empty(trim($password))) {
-            $query  = "SELECT * FROM admin WHERE username = '$username'";
-            $result = mysqli_query($koneksi, $query);
-            $rows   = mysqli_num_rows($result);
-
-            if ($rows != 0) {
-                $adminData = mysqli_fetch_assoc($result);
-                // Compare passwords without hashing
-                if ($password === $adminData['password']) {
-                    $_SESSION['username'] = $username;
-                    header('Location: index-admin.php');
-                    exit();
-                } else {
-                    // Password salah
-                    $error = 'Password salah !!';
-                }
-            } else {
-                // Username salah
-                $error = 'Username tidak ditemukan';
-            }
-        }
-    }
-}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +30,11 @@ if (isset($_POST['submit'])) {
     <!-- Font Awesome CDN Link -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
 
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
     
 </head>
 <body>
@@ -77,7 +46,54 @@ if (isset($_POST['submit'])) {
                     <strong>Error!</strong> ' . $error . '
                 </div>';
         }
-        ?>    
+
+        if (isset($_POST['submit'])) {
+            $username = stripslashes($_POST['username']);
+            $username = mysqli_real_escape_string($koneksi, $username);
+            $password = stripslashes($_POST['password']);
+            $password = mysqli_real_escape_string($koneksi, $password);
+        
+            $userCaptcha = $_POST['kodecaptcha'];
+            $captchaSession = $_SESSION['code'];
+        
+            if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
+                echo '<script>alert("Captcha salah"); window.location="login-page-admin.php"</script>';
+            } else {
+                if (!empty(trim($username)) && !empty(trim($password))) {
+                    $query  = "SELECT * FROM admin WHERE username = '$username'";
+                    $result = mysqli_query($koneksi, $query);
+                    $rows   = mysqli_num_rows($result);
+        
+                    if ($rows != 0) {
+                        $adminData = mysqli_fetch_assoc($result);
+                        // Compare passwords without hashing
+                        if ($password === $adminData['password']) {
+                            $_SESSION['username'] = $username;
+                            echo '<script>
+                                Swal.fire({
+                                icon: "success",
+                                title: "Login berhasil!",
+                                showConfirmButton: false,
+                                timer: 1500
+                                }).then(() => {
+                                window.location="index-admin.php";
+                                });
+                        </script>';
+                            exit();
+                        } else {
+                            // Password salah
+                            $error = 'Password salah !!';
+                        }
+                    } else {
+                        // Username salah
+                        $error = 'Username tidak ditemukan';
+                    }
+                }
+            }
+        }
+        ?>   
+        
+        
         <section class="login-container">
             <div class="book-img">
                 <img src="../img/buku.png" alt="Books Image"/>
@@ -111,7 +127,7 @@ if (isset($_POST['submit'])) {
     </div>
 
     
-
+                        
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6pZl3/JfxI65qD5V/s2IeVFYfH9SmoQ5" crossorigin="anonymous"></script>
     

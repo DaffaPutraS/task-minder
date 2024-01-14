@@ -9,41 +9,6 @@ if (isset($_SESSION['username'])) {
     header('Location: dashboard.php');
     exit();
 }
-
-if (isset($_POST['submit'])) {
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($koneksi, $username);
-    $password = stripslashes($_POST['password']);
-    $password = mysqli_real_escape_string($koneksi, $password);
-
-    $userCaptcha = $_POST['kodecaptcha'];
-    $captchaSession = $_SESSION['code'];
-
-    if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
-        echo '<script>alert("Captcha salah"); window.location="login-page.php"</script>';
-    } else {
-        if (!empty(trim($username)) && !empty(trim($password))) {
-            $query  = "SELECT * FROM users WHERE username = '$username'";
-            $result = mysqli_query($koneksi, $query);
-            $rows   = mysqli_num_rows($result);
-
-            if ($rows != 0) {
-                $hash  = mysqli_fetch_assoc($result)['password'];
-                if (password_verify($password, $hash)) {
-                    $_SESSION['username'] = $username;
-                    header('Location: dashboard.php');
-                    exit();
-                } else {
-                    // Password salah
-                    $error = 'Password salah !!';
-                }
-            } else {
-                // Username salah
-                $error = 'Username tidak ditemkan';
-            }
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +29,12 @@ if (isset($_POST['submit'])) {
 
     <!-- Font Awesome CDN Link -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
 
@@ -73,6 +44,71 @@ if (isset($_POST['submit'])) {
             echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 300px; position: fixed; top: 20px; right: 20px;">
                     <strong>Error!</strong> ' . $error . '
                 </div>';
+        }
+
+        if (isset($_POST['submit'])) {
+            $username = stripslashes($_POST['username']);
+            $username = mysqli_real_escape_string($koneksi, $username);
+            $password = stripslashes($_POST['password']);
+            $password = mysqli_real_escape_string($koneksi, $password);
+        
+            $userCaptcha = $_POST['kodecaptcha'];
+            $captchaSession = $_SESSION['code'];
+        
+            if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
+                echo '<script>
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Captcha salah!",
+                            showConfirmButton: false,
+                            timer: 1500
+                            });
+                    </script>';
+            } else {
+                if (!empty(trim($username)) && !empty(trim($password))) {
+                    $query  = "SELECT * FROM users WHERE username = '$username'";
+                    $result = mysqli_query($koneksi, $query);
+                    $rows   = mysqli_num_rows($result);
+        
+                    if ($rows != 0) {
+                        $hash  = mysqli_fetch_assoc($result)['password'];
+                        if (password_verify($password, $hash)) {
+                            $_SESSION['username'] = $username;
+                            echo '<script>
+                                    Swal.fire({
+                                    icon: "success",
+                                    title: "Login berhasil!",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                    }).then(() => {
+                                    window.location="dashboard.php";
+                                    });
+                            </script>';
+                            exit();
+                        } else {
+                            // Password salah
+                            echo '<script>
+                                    Swal.fire({
+                                        icon: "warning",
+                                        title: "Password Salah!",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                        });
+                                </script>';
+                        }
+                    } else {
+                        // Username salah
+                        echo '<script>
+                                    Swal.fire({
+                                        icon: "warning",
+                                        title: "Username tidak ada!",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                        });
+                                </script>';
+                    }
+                }
+            }
         }
     ?>    
         <section class="login-container">
