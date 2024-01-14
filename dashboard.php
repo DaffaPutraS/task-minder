@@ -115,9 +115,9 @@ if (!isset($_SESSION['username'])) {
                                 <div class="card-menu" onclick="toggleDropdown(this)">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                     <div class="dropdown-content">
-                                        <a href="#">Edit</a>
+                                        <a href="edit-page.php?task_id=<?php echo $row['task_id']; ?>">Edit</a>
                                         <a href="#">Detail</a>
-                                        <a href="#">Delete</a>
+                                        <a href="proses/delete.php?task_id=<?php echo $row['task_id']; ?>">Delete</a>
                                     </div>
                                 </div>
                             </div>

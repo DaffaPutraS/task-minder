@@ -41,24 +41,24 @@
     ?>
     <h1 class="text-center display-4" >Edit Page</h1>
     <form action="proses/edit.php" method="post" >
-        <table>
+        <table class="table table-hovered">
             <tr>
-                <td>Id Akun</td>
+                <td class="col-md-5 form-label" >Id Akun</td>
                 <td>
                     <input type="hidden" name="task_id" value="<?php echo $d['task_id']; ?>" >
-                    <input type="text" name="username" placeholder="ID Akun" value="<?php echo $d['username']; ?>" >
+                    <input type="text" name="username" placeholder="ID Akun" value="<?php echo $d['username']; ?>" readonly >
                 </td>
             </tr>
             <tr>
-                <td>Nama Task</td>
+                <td class="col-md-5 form-label">Nama Task</td>
                 <td><input type="text" name="task_name" placeholder="Nama Tugas" value="<?php echo $d['task_name']; ?>" ></td>
             </tr>
             <tr>
-                <td>Tanggal Deadline</td>
+                <td class="col-md-5 form-label">Tanggal Deadline</td>
                 <td><input type="date" name="date" class="datepicker" ></td>
             </tr>
             <tr>
-                <td>Deksripsi Tugas</td>
+                <td class="col-md-5 form-label">Deksripsi Tugas</td>
                 <td><textarea name="description" id="description" cols="22" rows="5" placeholder="Deskripsi Tugas" value="<?php echo $d['description']; ?>" ></textarea></td>
             </tr>
             <tr>

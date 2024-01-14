@@ -23,7 +23,7 @@
         $result = mysqli_query($koneksi, $query);
 
         if ($result) {
-            echo '<script>alert("Yeay berhasil edit tugas, banyak revisi ya ?"); window.location="../show-page.php"</script>';
+            echo '<script>alert("Yeay berhasil edit tugas, banyak revisi ya ?"); window.location="../dashboard.php"</script>';
             exit();
         } else {
             echo '<script>alert("Gagal nih salah input "<?php . mysqli_error($koneksi); ?>", udah pusing ?"); window.location="../edit-page.php"</script>';
