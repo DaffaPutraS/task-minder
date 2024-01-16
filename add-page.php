@@ -73,7 +73,7 @@
     $( function() {
     $( ".datepicker" ).datepicker({
         dateFormat: 'yy-mm-dd' // Format tanggal sesuai kebutuhan
-        autoclose: true;
+        autoclose: true
         });
     });
     </script>
