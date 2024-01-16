@@ -1,103 +1,138 @@
-/* style-edit-page.css */
-@import url("https://fonts.googleapis.com/css2?family=Merienda+One&family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Montserrat:wght@600&family=Mulish:wght@500&family=Open+Sans:wght@500&family=Poppins&display=swap');
-
 :root {
-    --header-height: 3rem;
-    --nav-width: 68px;
-    --first-color: #57C5B6;
-    --first-color-light: #ececec;
+    --main-color: #57C5B6;
     --second-color: #159895;
     --third-color: #1A5F7A;
     --fourth-color: #002B5B;
-    --white-color: #F7F6FB;
-    --body-font: 'Poppins', sans-serif;
-    --normal-font-size: 1rem;
-    --z-fixed: 100;
-    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-}
+    --black: #333;
+    --white: #fff;
+    --light-color: #666;
+    --border:.2rem solid var(--black);
+    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+  }
 
-/* style-edit-page.css */
-
-body {
-    font-family: 'Arial', sans-serif;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-.main-page {
+body {
     display: flex;
+    height: 100vh;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, var(--first-color), var(--fourth-color) ) no-repeat;
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, var(--main-color), var(--fourth-color) );
 }
 
-.card-edit {
-    width: 400px;
-    background-color: #fff;
+.container {
+    max-width: 700px;
+    width: 100%;
+    background: #fff;
+    padding: 25px 30px;
     border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: 3px solid rgb(0, 214, 210);
 }
 
-.card-header {
-    padding: 20px;
-    background-color: #007bff;
-    color: #fff;
+.container .title  {
+    font-size: 2.5rem;
+    font-weight: 500;
+    position: relative;
     text-align: center;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    margin-bottom: 3rem;
 }
 
-.title-card {
-    margin: 0;
-    font-size: 1.5rem;
+/* .container .title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: linear-gradient(135deg, var(--main-color), var(--fourth-color))
+} */
+
+.container form .user-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
-.card-body {
-    padding: 20px;
+form .user-details .input-box {
+    margin-bottom: 15px;
 }
 
-.form-label {
+.user-details .input-box .details {
+    display: block;
+    font-weight: 500;
     margin-bottom: 5px;
-    color: #333;
 }
 
-.form-control {
+.user-details .input-box input {
+    height: 45px;
     width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
+    outline: none;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    padding-left: 15px;
+    font-size: 16px;
 }
 
-.datepicker {
+.user-details .input-box textarea {
+    height: 45px;
     width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solic #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
 }
 
-.btn-primary {
-    background-color: var(--first-color);
+.user-details .input-box input:focus, 
+.user-details .input-box input:valid {
+    border-color: var(--fourth-color);
+}
+
+form .button {
+    height: 45px;
+    margin: 45px 0;
+}
+
+form .button input {
+    height: 100%;
+    width: 100%;
+    outline: none;
     color: #fff;
-    padding: 10px 15px;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: .3s;
+    font-size: 18px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--main-color), var(--fourth-color));
+    transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
-    background-color: var(--third-color);
-    transition: .3s;
+form .button input:hover {
+    background: linear-gradient(-135deg, var(--main-color), var(--fourth-color));
 }
 
-/* Add your additional styles as needed */
+@media (max-width: 584px) {
+    .container {
+        max-width: 100%;
+    }
 
+    form .user-details .input-box {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .container form .user-details {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+
+    .user-details::-webkit-scrollbar {
+        width: 0;
+    }
+}
