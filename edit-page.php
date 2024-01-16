@@ -33,29 +33,29 @@
             <div class="user-details">
                 <div class="input-box" style="display: none;">
                 <input type="hidden" name="task_id" value="<?php echo $d['task_id']; ?>">
-                    <label for="username" class="form-label">Id Akun</label>
-                    <input type="text" name="username" class="form-control" placeholder="ID Akun" value="<?php echo $d['username']; ?>" readonly>
+                    <label for="username" class="details">Id Akun</label>
+                    <input type="text" name="username" placeholder="ID Akun" value="<?php echo $d['username']; ?>" readonly>
                 </div>
 
                 <div class="input-box">
-                    <label for="task_name" class="form-label">Nama Tugas</label>
-                    <input type="text" name="task_name" class="form-control" placeholder="Nama Tugas" value="<?php echo $d['task_name']; ?>" required>
+                    <label for="task_name" class="details">Nama Tugas</label>
+                    <input type="text" name="task_name" placeholder="Nama Tugas" value="<?php echo $d['task_name']; ?>" required>
                 </div>
 
                 <div class="input-box">
-                    <label for="date" class="form-label">Tanggal Deadline</label>
-                    <input type="date" name="date" class="form-control datepicker" value="<?php echo $d['date']; ?>" required>
+                    <label for="date" class="details">Tanggal Deadline</label>
+                    <input type="date" name="date" class="datepicker" value="<?php echo $d['date']; ?>" required>
                 </div>
 
                 <div class="input-box">
-                    <label for="description" class="form-label">Deskripsi Tugas</label>
-                    <textarea name="description" id="description" class="form-control" rows="5" placeholder="Deskripsi Tugas" required><?php echo $d['description']; ?></textarea>
+                    <label for="description" class="details">Deskripsi Tugas</label>
+                    <textarea name="description" id="description" rows="5" placeholder="Deskripsi Tugas" required><?php echo $d['description']; ?></textarea>
                 </div>
-                </div>
+            </div>
                 
-                <div class="button">
-                    <input type="submit" class="btn btn-primary" value="Edit Data">
-                </div>
+            <div class="button">
+                <input type="submit" class="btn btn-primary" value="Edit Data">
+            </div>
             </form>
         </div>
     
