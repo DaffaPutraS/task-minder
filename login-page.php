@@ -106,6 +106,7 @@ if (isset($_POST['submit'])) {
             $rows   = mysqli_num_rows($result);
 
             if ($rows != 0) {
+                date_default_timezone_set('Asia/Jakarta');
                 $hash  = mysqli_fetch_assoc($result)['password'];
                 if (password_verify($password, $hash)) {
                     $_SESSION['username'] = $username;
