@@ -1,0 +1,24 @@
+[
+    {
+        "username": "ujang99",
+        "timestamp": "2024-01-16 17:02:34",
+        "status": "success"
+    },
+    {
+        "username": "asdasd",
+        "timestamp": "2024-01-16 17:05:08",
+        "status": "failed",
+        "reason": "Password salah"
+    },
+    {
+        "username": "ujang99",
+        "timestamp": "2024-01-16 17:05:21",
+        "status": "failed",
+        "reason": "Password salah"
+    },
+    {
+        "username": "ujang99",
+        "timestamp": "2024-01-16 17:24:15",
+        "status": "success"
+    }
+]

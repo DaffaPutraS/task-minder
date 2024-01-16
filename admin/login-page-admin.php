@@ -79,50 +79,71 @@ if (isset($_SESSION['username'])) {
                     </div>';
             }
 
-            if (isset($_POST['submit'])) {
-                $username = stripslashes($_POST['username']);
-                $username = mysqli_real_escape_string($koneksi, $username);
-                $password = stripslashes($_POST['password']);
-                $password = mysqli_real_escape_string($koneksi, $password);
-            
-                $userCaptcha = $_POST['kodecaptcha'];
-                $captchaSession = $_SESSION['code'];
-            
-                if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
-                    echo '<script>alert("Captcha salah"); window.location="login-page-admin.php"</script>';
-                } else {
-                    if (!empty(trim($username)) && !empty(trim($password))) {
-                        $query  = "SELECT * FROM admin WHERE username = '$username'";
-                        $result = mysqli_query($koneksi, $query);
-                        $rows   = mysqli_num_rows($result);
-            
-                        if ($rows != 0) {
-                            $adminData = mysqli_fetch_assoc($result);
-                            // Compare passwords without hashing
-                            if ($password === $adminData['password']) {
-                                $_SESSION['username'] = $username;
-                                echo '<script>
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Login berhasil!",
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        }).then(() => {
-                                            window.location="index-admin.php";
-                                        });
-                                </script>';
-                                exit();
-                            } else {
-                                // Password salah
-                                $error = 'Password salah !!';
-                            }
+        
+        if (isset($_POST['submit'])) {
+            $username = stripslashes($_POST['username']);
+            $username = mysqli_real_escape_string($koneksi, $username);
+            $password = stripslashes($_POST['password']);
+            $password = mysqli_real_escape_string($koneksi, $password);
+
+            $userCaptcha = $_POST['kodecaptcha'];
+            $captchaSession = $_SESSION['code'];
+
+            if (empty($userCaptcha) || $userCaptcha !== $captchaSession) {
+                echo '<script>
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Captcha salah!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    </script>';
+            } else {
+                if (!empty(trim($username)) && !empty(trim($password))) {
+                    $query  = "SELECT * FROM admin WHERE username = '$username'";
+                    $result = mysqli_query($koneksi, $query);
+                    $rows   = mysqli_num_rows($result);
+
+                    if ($rows != 0) {
+                        $storedPassword  = mysqli_fetch_assoc($result)['password'];
+                        if ($password === $storedPassword) {
+                            $_SESSION['username'] = $username;
+                            echo '<script>
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Login berhasil!",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then(() => {
+                                        window.location="index-admin.php";
+                                    });
+                            </script>';
+                            exit();
                         } else {
-                            // Username salah
-                            $error = 'Username tidak ditemukan';
+                            // Password salah
+                            echo '<script>
+                                    Swal.fire({
+                                        icon: "warning",
+                                        title: "Password Salah!",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                            </script>';
                         }
+                    } else {
+                        // Username salah
+                        echo '<script>
+                                    Swal.fire({
+                                        icon: "warning",
+                                        title: "Username tidak ada!",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                            </script>';
                     }
                 }
             }
+        }
 
         ?>
         <section class="login-container">

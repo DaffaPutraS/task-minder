@@ -71,70 +71,105 @@ if (isset($_SESSION['username'])) {
 </head>
 <body>
 <?php
-    if (isset($_POST['submit'])) {
-        $username = stripslashes($_POST['username']);
-        $username = mysqli_real_escape_string($koneksi, $username);
-        $password = stripslashes($_POST['password']);
-        $password = mysqli_real_escape_string($koneksi, $password);
+    // Fungsi untuk menulis log ke file JSON
+function writeLog($logData) {
+    $logFile = 'logs/log.json';
 
-        $userCaptcha = $_POST['kodecaptcha'];
-        $captchaSession = $_SESSION['code'];
+    $currentLogs = file_exists($logFile) ? json_decode(file_get_contents($logFile), true) : [];
+    $currentLogs[] = $logData;
 
-        if (empty($userCaptcha) || $userCaptcha !== $captchaSession) {
-            echo '<script>
-                    Swal.fire({
-                        icon: "warning",
-                        title: "Captcha salah!",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                </script>';
-        } else {
-            if (!empty(trim($username)) && !empty(trim($password))) {
-                $query  = "SELECT * FROM users WHERE username = '$username'";
-                $result = mysqli_query($koneksi, $query);
-                $rows   = mysqli_num_rows($result);
+    file_put_contents($logFile, json_encode($currentLogs, JSON_PRETTY_PRINT));
+}
 
-                if ($rows != 0) {
-                    $hash  = mysqli_fetch_assoc($result)['password'];
-                    if (password_verify($password, $hash)) {
-                        $_SESSION['username'] = $username;
-                        echo '<script>
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Login berhasil!",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then(() => {
-                                    window.location="dashboard.php";
-                                });
-                        </script>';
-                        exit();
-                    } else {
-                        // Password salah
-                        echo '<script>
-                                Swal.fire({
-                                    icon: "warning",
-                                    title: "Password Salah!",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                        </script>';
-                    }
-                } else {
-                    // Username salah
+if (isset($_POST['submit'])) {
+    $username = stripslashes($_POST['username']);
+    $username = mysqli_real_escape_string($koneksi, $username);
+    $password = stripslashes($_POST['password']);
+    $password = mysqli_real_escape_string($koneksi, $password);
+
+    $userCaptcha = $_POST['kodecaptcha'];
+    $captchaSession = $_SESSION['code'];
+
+    if (empty($userCaptcha) || $userCaptcha !== $captchaSession) {
+        echo '<script>
+                Swal.fire({
+                    icon: "warning",
+                    title: "Captcha salah!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>';
+    } else {
+        if (!empty(trim($username)) && !empty(trim($password))) {
+            $query  = "SELECT * FROM users WHERE username = '$username'";
+            $result = mysqli_query($koneksi, $query);
+            $rows   = mysqli_num_rows($result);
+
+            if ($rows != 0) {
+                $hash  = mysqli_fetch_assoc($result)['password'];
+                if (password_verify($password, $hash)) {
+                    $_SESSION['username'] = $username;
+
+                    // Log informasi login
+                    $logData = array(
+                        'username' => $username,
+                        'timestamp' => date('Y-m-d H:i:s'),
+                        'status' => 'success'
+                    );
+                    writeLog($logData);
+
                     echo '<script>
-                                Swal.fire({
-                                    icon: "warning",
-                                    title: "Username tidak ada!",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                        </script>';
+                            Swal.fire({
+                                icon: "success",
+                                title: "Login berhasil!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location="dashboard.php";
+                            });
+                    </script>';
+                    exit();
+                } else {
+                    // Password salah
+                    $logData = array(
+                        'username' => $username,
+                        'timestamp' => date('Y-m-d H:i:s'),
+                        'status' => 'failed',
+                        'reason' => 'Password salah'
+                    );
+                    writeLog($logData);
+
+                    echo '<script>
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Password Salah!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                    </script>';
                 }
+            } else {
+                // Username salah
+                $logData = array(
+                    'username' => $username,
+                    'timestamp' => date('Y-m-d H:i:s'),
+                    'status' => 'failed',
+                    'reason' => 'Username tidak ada'
+                );
+                writeLog($logData);
+
+                echo '<script>
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Username tidak ada!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                    </script>';
             }
         }
     }
+}
 ?>
     <div class="background">
         <?php
