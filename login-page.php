@@ -35,6 +35,39 @@ if (isset($_SESSION['username'])) {
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Refresh Captcha Script -->
+    <script>
+        $(document).ready(function () {
+            // Fungsi untuk memuat captcha dari server
+            function loadCaptcha() {
+    $.ajax({
+        url: 'proses/captcha.php?' + new Date().getTime(),
+        type: 'GET',
+        dataType: 'text',  // Ganti dataType menjadi 'text'
+        success: function (data) {
+            // Menampilkan captcha pada halaman web
+            var captchaImage = $('.captcha img');
+            captchaImage.attr('src', 'data:image/jpeg;base64,' + data);  // Menambahkan 'data:image/jpeg;base64,' untuk menampilkan gambar secara langsung
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+}
+
+
+            // Memuat captcha saat halaman pertama kali dimuat
+            loadCaptcha();
+
+            // Meng-handle klik tombol refresh
+            $('#refresh-captcha-btn').click(function () {
+                loadCaptcha(); // Memuat captcha baru saat tombol di-klik
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -126,16 +159,25 @@ if (isset($_SESSION['username'])) {
                         <input type="password" placeholder="Password" name="password" required>
                     </div>
                     <div class="captcha">
-                        <img src="proses/captcha.php" alt="gambar"><br>
+                        <img class="captcha-image" src="proses/captcha.php" alt="gambar"><br>
                     </div>
+                    
                     <div class="input-captcha">
                         <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
+                    </div>
+
+                    <div class="refresh-captcha">
+                        <button type="button" id="refresh-captcha-btn">Refresh Captcha</button>
                     </div>
                     
                     <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
                     
                     <div class="href-register">
                         <p>Belum punya account? <a href="register-page.php">Register</a></p>
+                    </div>
+
+                    <div class="href-register">
+                        <a href="index.php">Kembali ke Beranda</a></p>
                     </div>
                 </form>
             </div>

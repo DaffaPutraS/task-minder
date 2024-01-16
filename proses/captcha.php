@@ -48,11 +48,15 @@ $y = 17;
 // Menambahkan teks captcha ke gambar
 imagestring($wh, $font_size, $x, $y, $code, $fc);
 
-// Menentukan tipe konten sebagai gambar JPEG
-header('content-type: image/jpg');
-
-// Menyimpan gambar sebagai file JPEG
+// Mengirim gambar captcha sebagai respons teks base64
+ob_start();
 imagejpeg($wh);
+$image_data = ob_get_contents();
+ob_end_clean();
+
+$image_base64 = base64_encode($image_data);
+
+echo $image_base64;
 
 // Menghancurkan gambar untuk menghemat memori
 imagedestroy($wh);
