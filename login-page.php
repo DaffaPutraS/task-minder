@@ -9,6 +9,71 @@ if (isset($_SESSION['username'])) {
     header('Location: dashboard.php');
     exit();
 }
+
+if (isset($_POST['submit'])) {
+    $username = stripslashes($_POST['username']);
+    $username = mysqli_real_escape_string($koneksi, $username);
+    $password = stripslashes($_POST['password']);
+    $password = mysqli_real_escape_string($koneksi, $password);
+
+    $userCaptcha = $_POST['kodecaptcha'];
+    $captchaSession = $_SESSION['code'];
+
+    if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
+        echo '<script>
+                Swal.fire({
+                    icon: "warning",
+                    title: "Captcha salah!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>';
+    } else {
+        if (!empty(trim($username)) && !empty(trim($password))) {
+            $query  = "SELECT * FROM users WHERE username = '$username'";
+            $result = mysqli_query($koneksi, $query);
+            $rows   = mysqli_num_rows($result);
+
+            if ($rows != 0) {
+                $hash  = mysqli_fetch_assoc($result)['password'];
+                if (password_verify($password, $hash)) {
+                    $_SESSION['username'] = $username;
+                    echo '<script>
+                            Swal.fire({
+                                icon: "success",
+                                title: "Login berhasil!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location="dashboard.php";
+                            });
+                    </script>';
+                    exit();
+                } else {
+                    // Password salah
+                    echo '<script>
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Password Salah!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                    </script>';
+                }
+            } else {
+                // Username salah
+                echo '<script>
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Username tidak ada!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                    </script>';
+            }
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +93,7 @@ if (isset($_SESSION['username'])) {
     <link rel="Icon" href="img/logo.png" type="image/x-icon">
 
     <!-- Font Awesome CDN Link -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
@@ -43,21 +108,20 @@ if (isset($_SESSION['username'])) {
         $(document).ready(function () {
             // Fungsi untuk memuat captcha dari server
             function loadCaptcha() {
-    $.ajax({
-        url: 'proses/captcha.php?' + new Date().getTime(),
-        type: 'GET',
-        dataType: 'text',  // Ganti dataType menjadi 'text'
-        success: function (data) {
-            // Menampilkan captcha pada halaman web
-            var captchaImage = $('.captcha img');
-            captchaImage.attr('src', 'data:image/jpeg;base64,' + data);  // Menambahkan 'data:image/jpeg;base64,' untuk menampilkan gambar secara langsung
-        },
-        error: function (error) {
-            console.error('Error:', error);
-        }
-    });
-}
-
+                $.ajax({
+                    url: 'proses/captcha.php?' + new Date().getTime(),
+                    type: 'GET',
+                    dataType: 'text',  // Ganti dataType menjadi 'text'
+                    success: function (data) {
+                        // Menampilkan captcha pada halaman web
+                        var captchaImage = $('.captcha img');
+                        captchaImage.attr('src', 'data:image/jpeg;base64,' + data);  // Menambahkan 'data:image/jpeg;base64,' untuk menampilkan gambar secara langsung
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
 
             // Memuat captcha saat halaman pertama kali dimuat
             loadCaptcha();
@@ -70,80 +134,14 @@ if (isset($_SESSION['username'])) {
     </script>
 </head>
 <body>
-
     <div class="background">
-    <?php
-        if ($error) {
-            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 300px; position: fixed; top: 20px; right: 20px;">
-                    <strong>Error!</strong> ' . $error . '
-                </div>';
-        }
-
-        if (isset($_POST['submit'])) {
-            $username = stripslashes($_POST['username']);
-            $username = mysqli_real_escape_string($koneksi, $username);
-            $password = stripslashes($_POST['password']);
-            $password = mysqli_real_escape_string($koneksi, $password);
-        
-            $userCaptcha = $_POST['kodecaptcha'];
-            $captchaSession = $_SESSION['code'];
-        
-            if (empty($userCaptcha) || strtolower($userCaptcha) !== strtolower($captchaSession)) {
-                echo '<script>
-                        Swal.fire({
-                            icon: "warning",
-                            title: "Captcha salah!",
-                            showConfirmButton: false,
-                            timer: 1500
-                            });
-                    </script>';
-            } else {
-                if (!empty(trim($username)) && !empty(trim($password))) {
-                    $query  = "SELECT * FROM users WHERE username = '$username'";
-                    $result = mysqli_query($koneksi, $query);
-                    $rows   = mysqli_num_rows($result);
-        
-                    if ($rows != 0) {
-                        $hash  = mysqli_fetch_assoc($result)['password'];
-                        if (password_verify($password, $hash)) {
-                            $_SESSION['username'] = $username;
-                            echo '<script>
-                                    Swal.fire({
-                                    icon: "success",
-                                    title: "Login berhasil!",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                    }).then(() => {
-                                    window.location="dashboard.php";
-                                    });
-                            </script>';
-                            exit();
-                        } else {
-                            // Password salah
-                            echo '<script>
-                                    Swal.fire({
-                                        icon: "warning",
-                                        title: "Password Salah!",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                        });
-                                </script>';
-                        }
-                    } else {
-                        // Username salah
-                        echo '<script>
-                                    Swal.fire({
-                                        icon: "warning",
-                                        title: "Username tidak ada!",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                        });
-                                </script>';
-                    }
-                }
+        <?php
+            if ($error) {
+                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 300px; position: fixed; top: 20px; right: 20px;">
+                        <strong>Error!</strong> ' . $error . '
+                    </div>';
             }
-        }
-    ?>    
+        ?>
         <section class="login-container">
             <div class="book-img">
                 <img src="img/buku.png" alt="Books Image"/>
