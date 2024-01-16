@@ -1,1 +1,3 @@
 *.json
+logs/log.json
+logs/
