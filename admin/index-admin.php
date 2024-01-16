@@ -16,41 +16,41 @@ if (!isset($_SESSION['username'])) {
 // }
 
 // Check if the form is submitted for deleting a user
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_delete"])) {
-    $user_id_to_delete = $_POST["delete_user"];
+// if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_delete"])) {
+//     $user_id_to_delete = $_POST["delete_user"];
 
-    // Perform the deletion query
-    $delete_query = "DELETE FROM users WHERE id_user = $user_id_to_delete";
-    $delete_result = mysqli_query($koneksi, $delete_query);
+//     // Perform the deletion query
+//     $delete_query = "DELETE FROM users WHERE id_user = $user_id_to_delete";
+//     $delete_result = mysqli_query($koneksi, $delete_query);
 
-    // Check if the query is successful
-    if ($delete_result) {
-        // Optional: Redirect to the same page after successful deletion
-        header("Location: index-admin.php");
-        exit();
-    } else {
-        // Handle the case where deletion fails
-        echo "Error deleting user: " . mysqli_error($koneksi);
-    }
-}
+//     // Check if the query is successful
+//     if ($delete_result) {
+//         // Optional: Redirect to the same page after successful deletion
+//         header("Location: index-admin.php");
+//         exit();
+//     } else {
+//         // Handle the case where deletion fails
+//         echo "Error deleting user: " . mysqli_error($koneksi);
+//     }
+// }
 
 // Pagination settings
-$records_per_page = 5;
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
-$offset = ($page - 1) * $records_per_page;
+// $records_per_page = 5;
+// $page = isset($_GET['page']) ? $_GET['page'] : 1;
+// $offset = ($page - 1) * $records_per_page;
 
-// Search functionality
-$search_query = isset($_GET['search']) ? $_GET['search'] : '';
-$search_condition = $search_query ? "WHERE username LIKE '%$search_query%'" : '';
+// // Search functionality
+// $search_query = isset($_GET['search']) ? $_GET['search'] : '';
+// $search_condition = $search_query ? "WHERE username LIKE '%$search_query%'" : '';
 
-// Query to fetch paginated and filtered data from the users table
-$query = "SELECT * FROM users $search_condition LIMIT $offset, $records_per_page";
-$result = mysqli_query($koneksi, $query);
+// // Query to fetch paginated and filtered data from the users table
+// $query = "SELECT * FROM users $search_condition LIMIT $offset, $records_per_page";
+// $result = mysqli_query($koneksi, $query);
 
-// Check if the query is successful
-if (!$result) {
-    die("Query failed: " . mysqli_error($koneksi));
-}
+// // Check if the query is successful
+// if (!$result) {
+//     die("Query failed: " . mysqli_error($koneksi));
+// }
 // Display the table
 ?>
 <!DOCTYPE html>

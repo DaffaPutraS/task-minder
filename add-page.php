@@ -18,7 +18,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Page | TaskMinder</title>
+    <title>Tambah Tugas | TaskMinder</title>
 
     <!-- CSS only -->
     <link rel="stylesheet" href="css/style-add-page.css">
@@ -35,7 +35,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="title">Add Page</div>
+        <div class="title">Tambahkan Tugas</div>
             <form action="proses/add.php" method="post">
                 <div class="user-details">
                     <div class="input-box">
@@ -59,7 +59,7 @@
                     </div>
                 </div>    
                 <div class="button">
-                    <input type="submit" value="Masukkin ke list bro">
+                    <input type="submit" value="Tambah">
                 </div>
             </form>
     </div>

@@ -34,6 +34,12 @@ if (!isset($_SESSION['username'])) {
     
     <!-- Link CSS -->
     <link rel="stylesheet" href="css/style-dashboard.css">
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
     
     <!-- Link JavaScript -->
     <script src="js/dashboard-scripts.js"></script>
@@ -116,7 +122,7 @@ if (!isset($_SESSION['username'])) {
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                     <div class="dropdown-content">
                                         <a href="edit-page.php?task_id=<?php echo $row['task_id']; ?>">Edit</a>
-                                        <a href="#">Detail</a>
+                                        <a href="detail-page.php?task_id=<?php echo $row['task_id']; ?>">Detail</a>
                                         <a href="proses/delete.php?task_id=<?php echo $row['task_id']; ?>">Delete</a>
                                     </div>
                                 </div>
@@ -171,7 +177,7 @@ if (!isset($_SESSION['username'])) {
 
             descriptions.forEach(function (description) {
                 var originalText = description.textContent;
-                var truncatedText = truncateText(originalText, 42);
+                var truncatedText = truncateText(originalText, 38);
 
                 description.textContent = truncatedText;
 

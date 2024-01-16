@@ -48,7 +48,7 @@ session_start();
                 if (isset($_SESSION['username'])) {
                     header("Location: login-page.php");
                 }
-
+                
                 // Menangani submit form
                 if (isset($_POST['submit'])) {
                     $username = stripslashes($_POST['username']);
@@ -105,10 +105,10 @@ session_start();
                     if ($result = mysqli_query($koneksi, $query)) return mysqli_num_rows($result);
                 }
                 ?>
-    
+                
     <section class="register-container">
             <div class="form">
-
+                
                 <!-- Menampilkan pesan kesalahan jika terdapat error -->
                 <?php if (!empty($error)) : ?>
                     <div class="alert alert-danger" role="alert" style="width: 500px; position: fixed; top: 20px; left: 20px;">

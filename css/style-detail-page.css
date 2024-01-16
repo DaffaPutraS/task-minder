@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Merienda+One&family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
+
+:root {
+    --header-height: 3rem;
+    --nav-width: 68px;
+    --first-color: #57C5B6;
+    --first-color-light: #ececec;
+    --second-color: #159895;
+    --third-color: #1A5F7A;
+    --fourth-color: #002B5B;
+    --white-color: #F7F6FB;
+    --body-font: 'Nunito', sans-serif;
+    --normal-font-size: 1rem;
+    --z-fixed: 100;
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--first-color), var(--fourth-color) ) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* .cookieCard {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,rgb(137, 104, 255),rgb(175, 152, 255));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cookieCard::before {
+    width: 150px;
+    height: 150px;
+    content: "";
+    background: linear-gradient(to right,rgb(142, 110, 255),rgb(208, 195, 255));
+    position: absolute;
+    z-index: 1;
+    border-radius: 50%;
+    right: -25%;
+    top: -25%;
+  }
+  
+  .cookieHeading {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: rgb(241, 241, 241);
+    z-index: 2;
+  }
+  
+  .cookieDescription {
+    font-size: 0.9em;
+    color: rgb(241, 241, 241);
+    z-index: 2;
+  }
+  
+  .cookieDescription a {
+    color: rgb(241, 241, 241);
+  }
+  */
+  
+  .acceptButton {
+    padding: 11px 20px;
+    background-color: var(--first-color);
+    transition-duration: .3s;
+    border: none;
+    color: rgb(241, 241, 241);
+    cursor: pointer;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'poppins', sans-serif;
+    font-size: .7rem;
+    font-weight: bold;
+  }
+  
+  .acceptButton:hover {
+    background-color: var(--third-color);
+    transition-duration: .3s;
+    color: rgb(241, 241, 241);
+    text-decoration: none;
+  }
+
+.card-container {
+  padding: 0 5rem;
+}
+
+.detail-card {
+  background: var(--white-color);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 3px solid rgb(0, 214, 210);
+  width: 100%;
+  height: 100%;
+}
+
+.detail-card h2 {
+  margin-bottom: 2rem;
+  text-align: left;
+  font-size: 2rem;
+}
+
+.detail-card h3 {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.detail-card p {
+  margin: 2rem 0;
+  max-height: 200px;
+  word-wrap: break-word;
+}
