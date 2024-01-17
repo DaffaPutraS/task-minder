@@ -107,74 +107,55 @@ if (!isset($_SESSION['username'])) {
                         <th>Timestamp</th>
                         <th>Status</th>
                         <th>Reason</th>
-                        <th>Action</th> <!-- New column for delete button -->
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Data JSON akan dimasukkan di sini menggunakan JavaScript -->
                 </tbody>
             </table>
-
-            <!-- Button to delete all data -->
-            <button id="deleteAll" class="btn btn-danger">Delete All Data</button>
         </div>
     </div>
-
-
-
-
-
-
 
     <script src="../js/alert-delete.js"></script>
     <script src="../js/dashboard.js"></script>
     <script src="../js/dropdown-profile-dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <script>
-    $(document).ready(function () {
-        // Mendapatkan data JSON dari server
-        $.ajax({
-            url: '../logs/log.json',
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // Memasukkan data JSON ke dalam tabel
-                $.each(data, function (index, log) {
-                    $('#logTable tbody').append(`
-                        <tr>
-                            <td>${log.username}</td>
-                            <td>${log.timestamp}</td>
-                            <td>${log.status}</td>
-                            <td>${log.reason ? log.reason : '-'}</td>
-                            <td><button class="btn btn-danger deleteBtn">Delete</button></td>
-                        </tr>
-                    `);
-                });
+        $(document).ready(function () {
+            // Mendapatkan data JSON dari server
+            $.ajax({
+                url: '../logs/log.json',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // Memasukkan data JSON ke dalam tabel
+                    $.each(data, function (index, log) {
+                        $('#logTable tbody').append(`
+                            <tr>
+                                <td>${log.username}</td>
+                                <td>${log.timestamp}</td>
+                                <td>${log.status}</td>
+                                <td>${log.reason ? log.reason : '-'}</td>
+                            </tr>
+                        `);
+                    });
 
-                // Inisialisasi DataTables with pagination set to 5
-                var dataTable = $('#logTable').DataTable({
-                    "pageLength": 5,
-                    "lengthMenu": [5, 10, 25, 50]
-                });
-
-                // Delete button click event
-                $('#logTable tbody').on('click', '.deleteBtn', function () {
-                    var row = $(this).closest('tr');
-                    dataTable.row(row).remove().draw(false);
-                });
-
-                // Delete all button click event
-                $('#deleteAll').on('click', function () {
-                    dataTable.clear().draw();
-                });
-            },
-            error: function (error) {
-                console.error('Error:', error);
-            }
+                    // Inisialisasi DataTables with pagination set to 5
+                    var dataTable = $('#logTable').DataTable({
+                        "pageLength": 5,
+                        "lengthMenu": [5, 10, 25, 50]
+                    });
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
 </html>
