@@ -160,6 +160,9 @@ if (isset($_SESSION['username'])) {
                     <div class="input-password">
                         <input type="password" placeholder="Password" name="password" required>
                     </div>
+                    <div class="refresh-captcha">
+                        <button type="button" id="refresh-captcha-btn">Refresh Captcha</button>
+                    </div>
                     <div class="captcha">
                         <img src="../proses/captcha.php" alt="gambar"><br>
                     </div>
@@ -167,9 +170,7 @@ if (isset($_SESSION['username'])) {
                         <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
                     </div>
 
-                    <div class="refresh-captcha">
-                        <button type="button" id="refresh-captcha-btn">Refresh Captcha</button>
-                    </div>
+                    
                     
                     <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
                     <div class="href-register">

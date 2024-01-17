@@ -114,8 +114,8 @@ if (!isset($_SESSION['username'])) {
             <div>
                 <a href="#" class="nav_logo"><img src="../img/logo.png" alt=""></i> <span class="nav_logo-name">ADMIN ONLY!</span> </a>
                 <div class="nav_list">
-                    <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i><span class="nav_name">Dashboard</span> </a>
-                    <a href="index-admin-log-user.php" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i><span class="nav_name">Logs user</span> </a>
+                    <a href="#" class="nav_link active"> <i class='bx bxs-user'></i><span class="nav_name">Data User</span> </a>
+                    <a href="index-admin-log-user.php" class="nav_link"> <i class='bx bxs-objects-vertical-bottom'></i><span class="nav_name">Logs user</span> </a>
                 </div>
             </div>
             <a href="../proses/logout-admin.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>

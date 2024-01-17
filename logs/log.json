@@ -1,55 +1,7 @@
 [
     {
         "username": "ujang99",
-        "timestamp": "2024-01-16 17:02:34",
-        "status": "success"
-    },
-    {
-        "username": "asdasd",
-        "timestamp": "2024-01-16 17:05:08",
-        "status": "failed",
-        "reason": "Password salah"
-    },
-    {
-        "username": "ujang99",
-        "timestamp": "2024-01-16 17:05:21",
-        "status": "failed",
-        "reason": "Password salah"
-    },
-    {
-        "username": "ujang99",
-        "timestamp": "2024-01-16 17:24:15",
-        "status": "success"
-    },
-    {
-        "username": "ujang99",
-        "timestamp": "2024-01-16 17:47:53",
-        "status": "success"
-    },
-    {
-        "username": "ujang99",
-        "timestamp": "2024-01-16 17:58:34",
-        "status": "success"
-    },
-    {
-        "username": "ujang99",
-        "timestamp": "2024-01-17 00:01:46",
-        "status": "success"
-    },
-    {
-        "username": "mamankk",
-        "timestamp": "2024-01-16 18:04:22",
-        "status": "failed",
-        "reason": "Username tidak ada"
-    },
-    {
-        "username": "gg6969",
-        "timestamp": "2024-01-17 00:04:57",
-        "status": "success"
-    },
-    {
-        "username": "ujang99",
-        "timestamp": "2024-01-17 00:05:33",
+        "timestamp": "2024-01-17 08:46:05",
         "status": "success"
     }
 ]

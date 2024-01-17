@@ -194,6 +194,11 @@ if (isset($_POST['submit'])) {
                     <div class="input-password">
                         <input type="password" placeholder="Password" name="password" required>
                     </div>
+
+                    <div class="refresh-captcha">
+                        <button type="button" id="refresh-captcha-btn">Refresh Captcha</button>
+                    </div>
+
                     <div class="captcha">
                         <img class="captcha-image" src="proses/captcha.php" alt="gambar"><br>
                     </div>
@@ -202,9 +207,7 @@ if (isset($_POST['submit'])) {
                         <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
                     </div>
 
-                    <div class="refresh-captcha">
-                        <button type="button" id="refresh-captcha-btn">Refresh Captcha</button>
-                    </div>
+                    
                     
                     <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
                     
@@ -212,7 +215,7 @@ if (isset($_POST['submit'])) {
                         <p>Belum punya account? <a href="register-page.php">Register</a></p>
                     </div>
 
-                    <div class="href-register">
+                    <div class="href-beranda">
                         <a href="index.php">Kembali ke Beranda</a></p>
                     </div>
                 </form>

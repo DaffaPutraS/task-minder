@@ -102,6 +102,27 @@ input[type=text], input[type=password], input[type=kodecaptcha] {
     animation: fade-in2 0.8s backwards;
 }
 
+.refresh-captcha {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(245,245,245);
+    max-width: 200px;
+    margin: auto;
+    animation: fade-in2 0.9s backwards;
+}
+
+.refresh-captcha button {
+    color: var(--third-color);
+    font-size: .9rem;
+    transition: .3s;
+}
+
+.refresh-captcha button:hover {
+    color: var(--fourth-color);
+    transition: .3s;
+}
+
 .input-captcha{
     animation: fade-in2 1s backwards;
 }
@@ -178,6 +199,12 @@ input[type=text]:focus, input[type=password]:focus, input[type=kodecaptcha]:focu
     text-decoration: none;
     color: var(--second-color);
     font-family: 'poppins', sans-serif;
+    transition: .3s;
+}
+
+.login-container .form .href-register a:hover {
+    color: var(--fourth-color);
+    transition: .3s;
 }
 
 .login-container .form .href-register p {
