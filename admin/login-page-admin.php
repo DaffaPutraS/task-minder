@@ -73,13 +73,14 @@ if (isset($_SESSION['username'])) {
 <body>
     <div class="background">
         <?php
+        // Menampilkan pesan error (jika ada)
             if ($error) {
                 echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 300px; position: fixed; top: 20px; right: 20px;">
                         <strong>Error!</strong> ' . $error . '
                     </div>';
             }
 
-        
+        // Memeriksa apakah formulir submit telah dikirim
         if (isset($_POST['submit'])) {
             $username = stripslashes($_POST['username']);
             $username = mysqli_real_escape_string($koneksi, $username);
@@ -89,6 +90,7 @@ if (isset($_SESSION['username'])) {
             $userCaptcha = $_POST['kodecaptcha'];
             $captchaSession = $_SESSION['code'];
 
+            // Memeriksa apakah captcha yang dimasukkan benar
             if (empty($userCaptcha) || $userCaptcha !== $captchaSession) {
                 echo '<script>
                         Swal.fire({
@@ -99,15 +101,19 @@ if (isset($_SESSION['username'])) {
                         });
                     </script>';
             } else {
+                // Memeriksa apakah username dan password tidak kosong
                 if (!empty(trim($username)) && !empty(trim($password))) {
                     $query  = "SELECT * FROM admin WHERE username = '$username'";
                     $result = mysqli_query($koneksi, $query);
                     $rows   = mysqli_num_rows($result);
 
+                    // Memeriksa apakah username ada dalam database
                     if ($rows != 0) {
                         $storedPassword  = mysqli_fetch_assoc($result)['password'];
+                        // Memeriksa apakah password sesuai
                         if ($password === $storedPassword) {
                             $_SESSION['username'] = $username;
+                            // Menampilkan pesan sukses dan mengarahkan ke halaman admin
                             echo '<script>
                                     Swal.fire({
                                         icon: "success",

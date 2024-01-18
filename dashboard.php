@@ -97,8 +97,10 @@ if (!isset($_SESSION['username'])) {
         // Mengambil nilai user_id dari session
         $username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 
+        // Mengambil data tugas (task) dari database berdasarkan username pengguna
         $retrieveData = mysqli_query($koneksi, "SELECT * FROM task WHERE username = '$username'");
 
+        // Menentukan halaman saat ini (jika tidak diset, default ke halaman 1)
         $page = (isset($_GET['page'])) ? (int) $_GET['page'] : 1;
 
         // Limit data per page
@@ -148,13 +150,18 @@ if (!isset($_SESSION['username'])) {
     <script src="js/dashboard.js"></script>
     <script src="js/dropdown-profile-dashboard.js"></script>
     <script>
+        // Fungsi untuk menampilkan/menyembunyikan dropdown menu
         function toggleDropdown(element) {
             element.querySelector('.dropdown-content').classList.toggle('show');
         }
 
+        // Menanggapi klik di luar elemen dengan kelas 'card-menu' untuk menyembunyikan dropdown menu
         window.onclick = function(event) {
+            // Mengambil semua elemen dengan kelas 'dropdown-content'
             if (!event.target.matches('.card-menu')) {
                 var dropdowns = document.getElementsByClassName("dropdown-content");
+
+                // Menutup semua dropdown yang terbuka
                 for (var i = 0; i < dropdowns.length; i++) {
                     var openDropdown = dropdowns[i];
                     if (openDropdown.classList.contains('show')) {
@@ -173,12 +180,16 @@ if (!isset($_SESSION['username'])) {
 
         // Memanggil function saat dokumen dimuat
         document.addEventListener('DOMContentLoaded', function () {
+            // Mengambil semua elemen dengan kelas 'recent'
             var descriptions = document.querySelectorAll('.recent');
 
+            // Iterasi melalui setiap elemen dan menerapkan fungsi truncateText
             descriptions.forEach(function (description) {
+                // Menyimpan teks asli
                 var originalText = description.textContent;
+                // Memanggil fungsi truncateText untuk memotong teks (maksimum 38 karakter)
                 var truncatedText = truncateText(originalText, 38);
-
+                // Mengganti teks elemen dengan teks yang sudah dipotong
                 description.textContent = truncatedText;
 
                 // Optional: Tambahkan tooltip dengan teks lengkap

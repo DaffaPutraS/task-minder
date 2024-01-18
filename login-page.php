@@ -14,6 +14,7 @@ if (isset($_SESSION['username'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,19 +42,19 @@ if (isset($_SESSION['username'])) {
 
     <!-- Refresh Captcha Script -->
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Fungsi untuk memuat captcha dari server
             function loadCaptcha() {
                 $.ajax({
                     url: 'proses/captcha.php?' + new Date().getTime(),
                     type: 'GET',
-                    dataType: 'text',  // Ganti dataType menjadi 'text'
-                    success: function (data) {
+                    dataType: 'text', // Ganti dataType menjadi 'text'
+                    success: function(data) {
                         // Menampilkan captcha pada halaman web
                         var captchaImage = $('.captcha img');
-                        captchaImage.attr('src', 'data:image/jpeg;base64,' + data);  // Menambahkan 'data:image/jpeg;base64,' untuk menampilkan gambar secara langsung
+                        captchaImage.attr('src', 'data:image/jpeg;base64,' + data); // Menambahkan 'data:image/jpeg;base64,' untuk menampilkan gambar secara langsung
                     },
-                    error: function (error) {
+                    error: function(error) {
                         console.error('Error:', error);
                     }
                 });
@@ -63,35 +64,41 @@ if (isset($_SESSION['username'])) {
             loadCaptcha();
 
             // Meng-handle klik tombol refresh
-            $('#refresh-captcha-btn').click(function () {
+            $('#refresh-captcha-btn').click(function() {
                 loadCaptcha(); // Memuat captcha baru saat tombol di-klik
             });
         });
     </script>
 </head>
+
 <body>
-<?php
+    <?php
     // Fungsi untuk menulis log ke file JSON
-function writeLog($logData) {
-    $logFile = 'logs/log.json';
+    function writeLog($logData)
+    {
+        $logFile = 'logs/log.json';
 
-    $currentLogs = file_exists($logFile) ? json_decode(file_get_contents($logFile), true) : [];
-    $currentLogs[] = $logData;
+        // Membaca log saat ini dari file JSON (jika ada)
+        $currentLogs = file_exists($logFile) ? json_decode(file_get_contents($logFile), true) : [];
+        // Menambahkan log baru ke dalam array log saat ini
+        $currentLogs[] = $logData;
+        // Menulis kembali log ke file JSON dengan format yang lebih rapi
+        file_put_contents($logFile, json_encode($currentLogs, JSON_PRETTY_PRINT));
+    }
 
-    file_put_contents($logFile, json_encode($currentLogs, JSON_PRETTY_PRINT));
-}
+    // Memeriksa apakah formulir login telah disubmit
+    if (isset($_POST['submit'])) {
+        $username = stripslashes($_POST['username']);
+        $username = mysqli_real_escape_string($koneksi, $username);
+        $password = stripslashes($_POST['password']);
+        $password = mysqli_real_escape_string($koneksi, $password);
 
-if (isset($_POST['submit'])) {
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($koneksi, $username);
-    $password = stripslashes($_POST['password']);
-    $password = mysqli_real_escape_string($koneksi, $password);
+        $userCaptcha = $_POST['kodecaptcha'];
+        $captchaSession = $_SESSION['code'];
 
-    $userCaptcha = $_POST['kodecaptcha'];
-    $captchaSession = $_SESSION['code'];
-
-    if (empty($userCaptcha) || $userCaptcha !== $captchaSession) {
-        echo '<script>
+        // Memeriksa apakah captcha yang dimasukkan benar
+        if (empty($userCaptcha) || $userCaptcha !== $captchaSession) {
+            echo '<script>
                 Swal.fire({
                     icon: "warning",
                     title: "Captcha salah!",
@@ -99,27 +106,30 @@ if (isset($_POST['submit'])) {
                     timer: 1500
                 });
             </script>';
-    } else {
-        if (!empty(trim($username)) && !empty(trim($password))) {
-            $query  = "SELECT * FROM users WHERE username = '$username'";
-            $result = mysqli_query($koneksi, $query);
-            $rows   = mysqli_num_rows($result);
+        } else {
+            // Memeriksa apakah username dan password tidak kosong
+            if (!empty(trim($username)) && !empty(trim($password))) {
+                $query  = "SELECT * FROM users WHERE username = '$username'";
+                $result = mysqli_query($koneksi, $query);
+                $rows   = mysqli_num_rows($result);
 
-            if ($rows != 0) {
-                date_default_timezone_set('Asia/Jakarta');
-                $hash  = mysqli_fetch_assoc($result)['password'];
-                if (password_verify($password, $hash)) {
-                    $_SESSION['username'] = $username;
+                // Memeriksa apakah username ada dalam database
+                if ($rows != 0) {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $hash  = mysqli_fetch_assoc($result)['password'];
+                    // Memeriksa apakah password sesuai
+                    if (password_verify($password, $hash)) {
+                        $_SESSION['username'] = $username;
 
-                    // Log informasi login
-                    $logData = array(
-                        'username' => $username,
-                        'timestamp' => date('Y-m-d H:i:s'),
-                        'status' => 'success'
-                    );
-                    writeLog($logData);
+                        // Log informasi login
+                        $logData = array(
+                            'username' => $username,
+                            'timestamp' => date('Y-m-d H:i:s'),
+                            'status' => 'success'
+                        );
+                        writeLog($logData);
 
-                    echo '<script>
+                        echo '<script>
                             Swal.fire({
                                 icon: "success",
                                 title: "Login berhasil!",
@@ -129,18 +139,18 @@ if (isset($_POST['submit'])) {
                                 window.location="dashboard.php";
                             });
                     </script>';
-                    exit();
-                } else {
-                    // Password salah
-                    $logData = array(
-                        'username' => $username,
-                        'timestamp' => date('Y-m-d H:i:s'),
-                        'status' => 'failed',
-                        'reason' => 'Password salah'
-                    );
-                    writeLog($logData);
+                        exit();
+                    } else {
+                        // Password salah
+                        $logData = array(
+                            'username' => $username,
+                            'timestamp' => date('Y-m-d H:i:s'),
+                            'status' => 'failed',
+                            'reason' => 'Password salah'
+                        );
+                        writeLog($logData);
 
-                    echo '<script>
+                        echo '<script>
                             Swal.fire({
                                 icon: "warning",
                                 title: "Password Salah!",
@@ -148,18 +158,18 @@ if (isset($_POST['submit'])) {
                                 timer: 1500
                             });
                     </script>';
-                }
-            } else {
-                // Username salah
-                $logData = array(
-                    'username' => $username,
-                    'timestamp' => date('Y-m-d H:i:s'),
-                    'status' => 'failed',
-                    'reason' => 'Username tidak ada'
-                );
-                writeLog($logData);
+                    }
+                } else {
+                    // Username salah
+                    $logData = array(
+                        'username' => $username,
+                        'timestamp' => date('Y-m-d H:i:s'),
+                        'status' => 'failed',
+                        'reason' => 'Username tidak ada'
+                    );
+                    writeLog($logData);
 
-                echo '<script>
+                    echo '<script>
                             Swal.fire({
                                 icon: "warning",
                                 title: "Username tidak ada!",
@@ -167,22 +177,22 @@ if (isset($_POST['submit'])) {
                                 timer: 1500
                             });
                     </script>';
+                }
             }
         }
     }
-}
-?>
+    ?>
     <div class="background">
         <?php
-            if ($error) {
-                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 300px; position: fixed; top: 20px; right: 20px;">
+        if ($error) {
+            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 300px; position: fixed; top: 20px; right: 20px;">
                         <strong>Error!</strong> ' . $error . '
                     </div>';
-            }
+        }
         ?>
         <section class="login-container">
             <div class="book-img">
-                <img src="img/buku.png" alt="Books Image"/>
+                <img src="img/buku.png" alt="Books Image" />
             </div>
             <div class="form">
                 <form action="login-page.php" method="POST">
@@ -202,15 +212,15 @@ if (isset($_POST['submit'])) {
                     <div class="captcha">
                         <img class="captcha-image" src="proses/captcha.php" alt="gambar"><br>
                     </div>
-                    
+
                     <div class="input-captcha">
                         <input type="text" placeholder="captcha" name="kodecaptcha" value="" maxlength="5" required>
                     </div>
 
-                    
-                    
-                    <button class="bn632-hover bn18" type="submit" name="submit" >login</button>
-                    
+
+
+                    <button class="bn632-hover bn18" type="submit" name="submit">login</button>
+
                     <div class="href-register">
                         <p>Belum punya account? <a href="register-page.php">Register</a></p>
                     </div>
@@ -223,11 +233,12 @@ if (isset($_POST['submit'])) {
         </section>
     </div>
 
-    
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6pZl3/JfxI65qD5V/s2IeVFYfH9SmoQ5" crossorigin="anonymous"></script>
-    
+
     <!-- ... (setelah modal) -->
 </body>
+
 </html>

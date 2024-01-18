@@ -129,133 +129,133 @@ if (!isset($_SESSION['username'])) {
     <!-- MAIN PAGE STARTS -->
 
     <div class="main-page">
-    <!-- Container untuk form pencarian -->
-    <div class="container">
-        <h2>Data Users</h2>
-        <!-- Form pencarian data berdasarkan ID Pembeli atau Nama -->
-        <form action="" method="post">
-            <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Search by ID User atau Nama" name="searchTerm">
-                <button class="search-btn" type="submit">Search</button>
-            </div>
-        </form>
+        <!-- Container untuk form pencarian -->
+        <div class="container">
+            <h2>Data Users</h2>
+            <!-- Form pencarian data berdasarkan ID Pembeli atau Nama -->
+            <form action="" method="post">
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search by ID User atau Nama" name="searchTerm">
+                    <button class="search-btn" type="submit">Search</button>
+                </div>
+            </form>
 
-        <!-- Tabel untuk menampilkan data -->
-        <table class="custom-table" style="box-shadow: 0px 0px 0.8px 0px #000000;">
-            <thead>
-                <!-- Header kolom-kolom pada tabel -->
-                <tr>
-                    <th>ID User</th>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Menampilkan data dari database -->
-                <?php
-                // Include file koneksi database
-                include "../proses/koneksi.php";
+            <!-- Tabel untuk menampilkan data -->
+            <table class="custom-table" style="box-shadow: 0px 0px 0.8px 0px #000000;">
+                <thead>
+                    <!-- Header kolom-kolom pada tabel -->
+                    <tr>
+                        <th>ID User</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Menampilkan data dari database -->
+                    <?php
+                    // Include file koneksi database
+                    include "../proses/koneksi.php";
 
-                // Konfigurasi Pagination
-                $limit = 5;
-                $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                $start = ($page - 1) * $limit;
+                    // Konfigurasi Pagination
+                    $limit = 5;
+                    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                    $start = ($page - 1) * $limit;
 
-                // Query untuk mengambil data dengan pagination dan kata kunci pencarian
-                $searchTerm = isset($_POST['searchTerm']) ? $_POST['searchTerm'] : '';
-                $whereClause = '';
+                    // Query untuk mengambil data dengan pagination dan kata kunci search
+                    $searchTerm = isset($_POST['searchTerm']) ? $_POST['searchTerm'] : ''; // Mendapatkan nilai pencarian dari form (jika ada)
+                    $whereClause = '';
 
-                if (!empty($searchTerm)) {
-                    $whereClause = "WHERE id_user LIKE '%$searchTerm%' OR name LIKE '%$searchTerm%'";
-                }
-
-                $query = "SELECT id_user, name, username, email FROM users
-                        $whereClause
-                        LIMIT $start, $limit";
-                $result = $koneksi->query($query);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        // Menampilkan baris data dalam tabel
-                        echo "<tr class='text-center'>";
-                        echo "<td>" . $row["id_user"] . "</td>";
-                        echo "<td>" . $row["name"] . "</td>";
-                        echo "<td>" . $row["username"] . "</td>";
-                        echo "<td>" . $row["email"] . "</td>";
-                        echo '<td>
-                                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal' . $row["id_user"] . '">Delete</a>
-                            </td>';
-                        echo "</tr>";
-
-                        // Modal untuk delete
-                        echo '<div class="modal fade" id="deleteModal' . $row["id_user"] . '" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Delete</h5>
-                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Apakah Anda yakin ingin menghapus data ini?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="proses-delete.php?id_user=' . $row["id_user"] . '" class="btn btn-danger">Delete</a>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>';
-                        
+                    if (!empty($searchTerm)) {
+                        // Membuat klausa WHERE jika terdapat kata kunci pencarian
+                        $whereClause = "WHERE id_user LIKE '%$searchTerm%' OR name LIKE '%$searchTerm%'";
                     }
-                } else {
-                    // Menampilkan pesan jika data tidak ditemukan
-                    echo "<tr><td colspan='7'>Data not found.</td></tr>";
-                }
 
-                $koneksi->close();
-                ?>
-            </tbody>
-        </table>
+                    $query = "SELECT id_user, name, username, email FROM users
+                                $whereClause
+                                LIMIT $start, $limit"; // Membuat query SQL dengan klausa WHERE (jika ada) dan LIMIT untuk paginasi
+                    $result = $koneksi->query($query); // Menjalankan query pada database
 
-        <!-- Pagination -->
-        <?php
-        // Include file koneksi database
-        include "../proses/koneksi.php";
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            // Menampilkan baris data dalam tabel
+                            echo "<tr class='text-center'>";
+                            echo "<td>" . $row["id_user"] . "</td>";
+                            echo "<td>" . $row["name"] . "</td>";
+                            echo "<td>" . $row["username"] . "</td>";
+                            echo "<td>" . $row["email"] . "</td>";
+                            echo '<td>
+                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal' . $row["id_user"] . '">Delete</a>
+            </td>';
+                            echo "</tr>";
 
-        // Query untuk mendapatkan total data
-        $queryTotal = "SELECT COUNT(id_user) as total FROM users";
-        $resultTotal = $koneksi->query($queryTotal);
-        $dataTotal = $resultTotal->fetch_assoc();
-        $totalPages = ceil($dataTotal['total'] / $limit);
+                            // Modal untuk delete
+                            echo '<div class="modal fade" id="deleteModal' . $row["id_user"] . '" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Delete</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin ingin menghapus data ini?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="proses-delete.php?id_user=' . $row["id_user"] . '" class="btn btn-danger">Delete</a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>';
+                        }
+                    } else {
+                        // Menampilkan pesan jika data tidak ditemukan
+                        echo "<tr><td colspan='7'>Data not found.</td></tr>";
+                    }
 
-        // Menentukan halaman saat ini
-        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                    $koneksi->close(); // Menutup koneksi ke database
+                    ?>
+                </tbody>
+            </table>
 
-        // Menampilkan tombol "Previous" jika halaman saat ini lebih dari 1
-        echo '<ul class="pagination justify-content-center">';
-        if ($current_page > 1) {
-            echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page - 1) . '">Previous</a></li>';
-        }
+            <!-- Pagination -->
+            <?php
+            // Include file koneksi database
+            include "../proses/koneksi.php";
 
-        // Menampilkan nomor-nomor halaman
-        for ($i = 1; $i <= $totalPages; $i++) {
-            echo '<li class="page-item ' . ($current_page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-        }
+            // Query untuk mendapatkan total data
+            $queryTotal = "SELECT COUNT(id_user) as total FROM users";
+            $resultTotal = $koneksi->query($queryTotal);
+            $dataTotal = $resultTotal->fetch_assoc();
+            $totalPages = ceil($dataTotal['total'] / $limit);
 
-        // Menampilkan tombol "Next" jika halaman saat ini kurang dari total halaman
-        if ($current_page < $totalPages) {
-            echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page + 1) . '">Next</a></li>';
-        }
+            // Menentukan halaman saat ini
+            $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-        echo '</ul>';
+            // Menampilkan tombol "Previous" jika halaman saat ini lebih dari 1
+            echo '<ul class="pagination justify-content-center">';
+            if ($current_page > 1) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page - 1) . '">Previous</a></li>';
+            }
 
-        $koneksi->close();
-        ?>
-    </div>
+            // Menampilkan nomor-nomor halaman
+            for ($i = 1; $i <= $totalPages; $i++) {
+                echo '<li class="page-item ' . ($current_page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+            }
+
+            // Menampilkan tombol "Next" jika halaman saat ini kurang dari total halaman
+            if ($current_page < $totalPages) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page + 1) . '">Next</a></li>';
+            }
+
+            echo '</ul>';
+
+            $koneksi->close();
+            ?>
+        </div>
     </div>
 
     <!-- MAIN PAGE ENDS -->
@@ -265,7 +265,7 @@ if (!isset($_SESSION['username'])) {
 
 
 
-    
+
 
     <script src="../js/alert-delete.js"></script>
     <script src="../js/dashboard.js"></script>

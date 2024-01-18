@@ -12,6 +12,7 @@ if (!isset($_SESSION['username'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,6 +57,7 @@ if (!isset($_SESSION['username'])) {
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
 </head>
+
 <body id="body-pd">
 
     <!-- HEADER STARTS -->
@@ -120,37 +122,35 @@ if (!isset($_SESSION['username'])) {
     <script src="../js/dashboard.js"></script>
     <script src="../js/dropdown-profile-dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Mendapatkan data JSON dari server
             $.ajax({
                 url: '../logs/log.json',
                 type: 'GET',
                 dataType: 'json',
-                success: function (data) {
+                success: function(data) {
                     // Memasukkan data JSON ke dalam tabel
-                    $.each(data, function (index, log) {
+                    $.each(data, function(index, log) {
+                        // Menambahkan baris baru ke dalam tabel dengan nilai dari data JSON
                         $('#logTable tbody').append(`
-                            <tr>
-                                <td>${log.username}</td>
-                                <td>${log.timestamp}</td>
-                                <td>${log.status}</td>
-                                <td>${log.reason ? log.reason : '-'}</td>
-                            </tr>
-                        `);
+                        <tr>
+                            <td>${log.username}</td>
+                            <td>${log.timestamp}</td>
+                            <td>${log.status}</td>
+                            <td>${log.reason ? log.reason : '-'}</td>
+                        </tr>
+                    `);
                     });
 
-                    // Inisialisasi DataTables with pagination set to 5
+                    // Inisialisasi DataTables dengan paginasi diatur ke 5
                     var dataTable = $('#logTable').DataTable({
                         "pageLength": 5,
                         "lengthMenu": [5, 10, 25, 50]
                     });
                 },
-                error: function (error) {
+                error: function(error) {
                     console.error('Error:', error);
                 }
             });
@@ -158,4 +158,5 @@ if (!isset($_SESSION['username'])) {
     </script>
 
 </body>
+
 </html>
